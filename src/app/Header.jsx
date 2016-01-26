@@ -1,14 +1,20 @@
 import React from 'react';
 import AppBar from 'material-ui/lib/app-bar';
 import FlatButton from 'material-ui/lib/flat-button';
+import Velocity from 'velocity-animate';
 
 
 let styles = {
-    header: {}
+    title: {
+
+    },
+    rightElement: {
+        marginTop: 14
+    }
 };
 
-function navigate(arg) {
-    console.log('navigate!!!', arg);
+function navigate(id) {
+    Velocity(document.getElementById(id), 'scroll', { duration: 750, offset: -63, easing: 'easeInOutCubic' });
 };
 
 let Header = React.createClass({
@@ -17,28 +23,53 @@ let Header = React.createClass({
         muiTheme: React.PropTypes.object
     },
 
+    getInitialState() {
+        return {
+            transparency: 0,
+            styles: {
+                header: {
+                    position: 'fixed',
+                    backgroundColor: 'rgba(0,0,0,0)',
+                    boxShadow: 'none'
+                }
+            }
+        };
+    },
+
     componentWillMount() {
-        styles.header.color = this.context.muiTheme.rawTheme.palette.textColor;
+        styles.title.color = this.context.muiTheme.rawTheme.palette.textColor;
+    },
+
+    componentDidMount() {
+        // fade app bar in on scroll
+        window.addEventListener('scroll', () => {
+            var transparency = this.state.transparency,
+                newTransparency = Math.min(window.pageYOffset / 600, 0.7);
+            if(transparency !== newTransparency) {
+                var styles = this.state.styles;
+                styles.header.backgroundColor = 'rgba(0,0,0,' + newTransparency + ')';
+                this.setState({ transparency: newTransparency, styles: styles });
+            }
+        });
     },
 
     render() {
+        var items = this.props.items.map((item) => {
+            return (
+                <FlatButton label={item.label} key={item.key} onClick={navigate.bind(this, item.key)}/>
+            );
+        });
+
         return (
             <AppBar
-                title={<span style={styles.header}>KutlerSkaggs</span>}
+                title={<span style={styles.title}>KutlerSkaggs</span>}
                 className="kss-header"
                 showMenuIconButton={false}
                 iconElementRight={
-                    <div>
-                        <FlatButton label="About" onClick={navigate.bind(this, 'about')}/>
-                        <FlatButton label="Portfolio" onClick={navigate.bind(this, 'portfolio')}/>
-                        <FlatButton label="Team" onClick={navigate.bind(this, 'team')}/>
-                        <FlatButton label="Contact" onClick={navigate.bind(this, 'contact')}/>
-                    </div>
+                    <div>{items}</div>
                 }
-                style={{
-                    backgroundColor: 'rgba(0,0,0,0)',
-                    boxShadow: 'none'
-                }}
+                iconStyleRight={styles.rightElement}
+                style={this.state.styles.header}
             />
         );
     }

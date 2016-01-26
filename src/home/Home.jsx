@@ -23,17 +23,23 @@ var styles = {
 const Home = React.createClass({
 
     render () {
+        var headerItems = [
+            { label: 'About', key: 'about' },
+            { label: 'Portfolio', key: 'portfolio' },
+            { label: 'Team', key: 'team' },
+            { label: 'Contact', key: 'contact' }
+        ];
         return (
             <div>
                 {/* background image */}
                 <img style={styles.image} src="assets/images/beaver_creek2.jpg" alt="" />
 
-                <Header/>
+                <Header items={headerItems}/>
                 <Landing/>
-                <About/>
-                <Portfolio/>
-                <Team/>
-                <Contact/>
+                <About id='about'/>
+                <Portfolio id='portfolio'/>
+                <Team id='team'/>
+                <Contact id='contact'/>
                 <Footer/>
             </div>
         );

@@ -1,21 +1,10 @@
 import React from 'react';
 import Radium from 'radium';
-import globalStyles from '../styles/global';
 
 let styles = {
     main: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: '7% 15% 7% 15%'
-    },
-    header: {
-        fontWeight: 300,
-        fontSize: '2em'
-    },
-    body: {
-        fontWeight: 300,
-        fontSize: '1.5em',
-        padding: '.5em 0 .5em 0'
+        // offset h3 top margin
+        padding: '2.54rem 0 4rem 0'
     },
     image: {
         maxWidth: '100%',
@@ -33,15 +22,14 @@ let Portfolio = React.createClass({
     componentWillMount() {
         var muiTheme = this.context.muiTheme.rawTheme;
         styles.main.color = muiTheme.palette.textColor;
-        styles.main.height = window.innerHeight * .8;
     },
 
     render() {
         return (
-            <div style={[globalStyles.flex, styles.main]}>
-                <div>
-                <div style={styles.header}>Westmoreland Coal Company</div>
-                <div style={styles.body}>Executive management key performance indicator dashboard.</div>
+            <div id={this.props.id} className='row middle-xs' style={styles.main}>
+                <div className='col-xs-12 col-sm-8 col-sm-offset-2'>
+                    <h3>Westmoreland Coal Co.</h3>
+                    <h5 className='thin'>Executive management key performance indicator dashboard.</h5>
                     <img style={styles.image} src="assets/images/wccportal.png" alt="" />
                 </div>
             </div>

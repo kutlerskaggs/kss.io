@@ -1,13 +1,10 @@
 import React from 'react';
 import Radium from 'radium';
 import theaterJS from 'theaterjs';
-import globalStyles from '../styles/global';
 
 let styles = {
     main: {
-        alignItems: 'center',
-        padding: '0 15% 0 15%',
-        fontSize: '3em'
+        paddingBottom: 64
     }
 };
 
@@ -20,7 +17,7 @@ let Portfolio = React.createClass({
     componentWillMount() {
         var muiTheme = this.context.muiTheme.rawTheme;
         styles.main.color = muiTheme.palette.accent1Color;
-        styles.main.height = window.innerHeight * .8;
+        styles.main.minHeight = window.innerHeight * .9;
     },
 
     componentDidMount() {
@@ -28,14 +25,14 @@ let Portfolio = React.createClass({
         var theater = theaterJS();
         theater
             .addActor('landing', { speed: 1, accuracy: 0.8 })
-            .addScene('landing:', 1000, 'PROBLEM SOLVING WITH LOGIC', 1000, -5, 'CREATIVITY', 1300, -10, 'PERSISTENCE', 1500, -11, 'SOFTWARE');
+            .addScene('landing:', 1000, 'PROBLEM SOLVING WITH LOGIC', 1000, -5, 'INNOVATION', 1300, -10, 'TENACITY', 1500, -8, 'SOFTWARE');
     },
 
     render() {
         return (
-            <div style={[globalStyles.flex, styles.main]}>
-                <div style={{ paddingBottom: '100px' }}>
-                    $&nbsp;<span id="landing" className='theater-cursor'></span>
+            <div className='row middle-xs' style={styles.main}>
+                <div className='col-xs-12 col-sm-8 col-sm-offset-2'>
+                    <h3>$&nbsp;<span id='landing' className='theater-cursor'></span></h3>
                 </div>
             </div>
         );
