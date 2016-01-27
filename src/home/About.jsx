@@ -1,16 +1,16 @@
-import React from 'react';
-import Radium from 'radium';
-import FontIcon from 'material-ui/lib/font-icon';
+import React from "react";
+import Radium from "radium";
+import FontIcon from "material-ui/lib/font-icon";
 
 let styles = {
     main: {
         minHeight: 600,
         // offset h3 top margin
-        paddingBottom: '1.46rem'
+        paddingBottom: "1.46rem"
     },
     icon: {
-        fontSize: '1.2em',
-        verticalAlign: 'text-bottom'
+        fontSize: "1.2em",
+        verticalAlign: "text-bottom"
     }
 };
 
@@ -28,10 +28,10 @@ let About = React.createClass ({
 
     render() {
         return (
-            <div className='row middle-xs' style={styles.main} id={this.props.id}>
-                <div className='col-xs-12 col-sm-8 col-sm-offset-2'>
+            <div className="row middle-xs" style={styles.main} id={this.props.id}>
+                <div className="col-xs-12 col-sm-8 col-sm-offset-2">
                     <h3>We <FontIcon className="material-icons" style={styles.icon}>favorite_border</FontIcon> Software</h3>
-                    <h4 className='thin'>Developing creative solutions to problems is what we're passionate about. Pair that with a borderline compulsive attention to detail and the result is delightfully useable software. We think you'll agree.</h4>
+                    <h4 className="thin">Developing creative solutions to problems is what we're passionate about. Pair that with a borderline compulsive attention to detail and the result is delightfully useable software. We think you'll agree.</h4>
                 </div>
             </div>
         );

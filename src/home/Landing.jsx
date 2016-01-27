@@ -1,6 +1,6 @@
-import React from 'react';
-import Radium from 'radium';
-import theaterJS from 'theaterjs';
+import React from "react";
+import Radium from "radium";
+import theaterJS from "theaterjs";
 
 let styles = {
     main: {
@@ -24,15 +24,15 @@ let Portfolio = React.createClass({
         // setup typed.js
         var theater = theaterJS();
         theater
-            .addActor('landing', { speed: 1, accuracy: 0.8 })
-            .addScene('landing:', 1000, 'PROBLEM SOLVING WITH LOGIC', 1000, -5, 'INNOVATION', 1300, -10, 'TENACITY', 1500, -8, 'SOFTWARE');
+            .addActor("landing", { speed: 1, accuracy: 0.8 })
+            .addScene("landing:", 1000, "PROBLEM SOLVING WITH LOGIC", 1000, -5, "INNOVATION", 1300, -10, "TENACITY", 1500, -8, "SOFTWARE");
     },
 
     render() {
         return (
-            <div className='row middle-xs' style={styles.main}>
-                <div className='col-xs-12 col-sm-8 col-sm-offset-2'>
-                    <h3>$&nbsp;<span id='landing' className='theater-cursor'></span></h3>
+            <div className="row middle-xs" style={styles.main}>
+                <div className="col-xs-12 col-sm-8 col-sm-offset-2">
+                    <h3>$&nbsp;<span id="landing" className="theater-cursor"></span></h3>
                 </div>
             </div>
         );

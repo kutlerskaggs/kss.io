@@ -1,10 +1,8 @@
-import React from 'react';
-import Colors from 'material-ui/lib/styles/colors';
-import ThemeManager from 'material-ui/lib/styles/theme-manager';
-import MyRawTheme from '../styles/theme';
-
-// component
-import Home from '../home/Home.jsx';
+import React from "react";
+import ThemeManager from "material-ui/lib/styles/theme-manager";
+import Home from "../home/Home.jsx";
+import RawMuiTheme from "../styles/theme"; // material ui theme
+import "../styles/styles.jsx"; // css
 
 const App = React.createClass({
 
@@ -14,14 +12,14 @@ const App = React.createClass({
 
   getChildContext() {
     return {
-      muiTheme: ThemeManager.getMuiTheme(MyRawTheme)
+      muiTheme: ThemeManager.getMuiTheme(RawMuiTheme)
     };
   },
 
-
   render () {
     return <Home/>;
-  },
+  }
+
 });
 
 export default App;
