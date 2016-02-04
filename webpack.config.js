@@ -38,6 +38,10 @@ module.exports = {
                 // font awesome
                 test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
                 loader: "file-loader"
+            }, {
+                // body background image
+                test: /\.jpg$/,
+                loader: "url-loader?limit=10000&mimetype=image/jpg"
             }
         ]
     }

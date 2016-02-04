@@ -2,14 +2,39 @@ import React from "react";
 import Radium from "radium";
 
 let styles = {
-    main: {
-        // offset h3 top margin
-        padding: "2.54rem 0 4rem 0"
+    amatic: {
+        fontFamily: "Amatic SC"
     },
-    image: {
-        maxWidth: "100%",
+    company: {
+        margin: "1rem 0px 2rem 0px"
+    },
+    iphone: {
+        width: "60%",
         height: "auto",
-        borderRadius: "5px"
+        transform: "translateY(250px)",
+        "@media(max-width: 991px)": {
+            display: "none"
+        }
+    },
+    iphoneWrapper: {
+        textAlign: "center"
+    },
+    main: {
+        paddingTop: 50,
+        paddingBottom: 50
+    },
+    macbook: {
+        width: "100%",
+        height: "auto"
+    },
+    text: {
+        lineHeight: "30px"
+    },
+    webApp: {
+        paddingLeft: "3rem",
+        "@media(max-width: 991px)": {
+            paddingLeft: "1rem"
+        }
     }
 };
 
@@ -24,13 +49,65 @@ let Portfolio = React.createClass({
         styles.main.color = muiTheme.palette.textColor;
     },
 
+    componentDidMount() {
+        var wrapperEl = document.getElementById("iphoneWrapper"),
+            iphoneEl = document.getElementById("iphone");
+        // watch scroll
+        window.addEventListener("scroll", () => {
+            let top = wrapperEl.getBoundingClientRect().top,
+                height = window.innerHeight,
+                diff = 449 + top - height;
+            diff = Math.min(Math.max(diff, 0), 250);
+            iphoneEl.style.transform = "translateY(" + diff + "px)";
+        });
+    },
+
     render() {
         return (
-            <div id={this.props.id} className="row middle-xs" style={styles.main}>
-                <div className="col-xs-12 col-sm-8 col-sm-offset-2">
-                    <h3>Westmoreland Coal Co.</h3>
-                    <h5 className="thin">Executive management key performance indicator dashboard.</h5>
-                    <img style={styles.image} src="images/wccportal.png" alt="" />
+            <div id={this.props.id} style={styles.main} className="container-fluid">
+                <div className="row center-xs">
+                    <h1>PORTFOLIO</h1>
+                </div>
+
+                <div className="row">
+                    {/* Add col-sm-offset-2 col-sm-8 col-md-offset-0 after hearing back on flexboxgrid issue opened */}
+                    <div style={styles.webApp} className="col-lg-offset-0 col-xs-12 col-md-4">
+                        <h3 style={styles.company}>Westmoreland Coal Co.</h3>
+                        <h3 style={styles.amatic}>Web Application</h3>
+                        <h6 style={styles.text}>
+                            <p>We had the opportunity to build an enterprise web app for Westmoreland that has enabled management to keep a closer eye on their Key Performance Indicators.</p>
+                            Features:
+                            <ul>
+                                <li>Fully Responsive</li>
+                                <li>Real Time ERP Data</li>
+                                <li>Two Factor Auth</li>
+                                <li>End to End JavaScript</li>
+                                <li>SMS</li>
+                                <li>Email</li>
+                                <li>Amazon Web Services Hosting</li>
+                            </ul>
+                        </h6>
+                    </div>
+
+                    <div className="col-xs-12 col-md-8">
+                        <img src="images/macbook.png" style={styles.macbook}></img>
+                    </div>
+                    <div id="iphoneWrapper" style={styles.iphoneWrapper} className="col-xs-12 col-md-4">
+                        <img id="iphone" src="images/iphone.png" style={styles.iphone}></img>
+                    </div>
+                    {/* Add col-sm-offset-2 col-sm-8 col-md-offset-0 after hearing back on flexboxgrid issue opened */}
+                    <div className="flex middle-xs col-xs-12 col-md-4">
+                        <div>
+                            <h3 style={styles.amatic}>Business Intelligence</h3>
+                            <h6 style={styles.text}>
+                                <p>Additionally, we were given the chance to build a complete business intelligence platform which aggregates data from three disparate ERP systems located throughout North America.</p>
+                                <p>This setup allows for wide visibility and deep analysis of the company's operations which would otherwise be very cumbersome.</p>
+                            </h6>
+                        </div>
+                    </div>
+                    <div className="col-xs-12 col-md-4">
+
+                    </div>
                 </div>
             </div>
         );

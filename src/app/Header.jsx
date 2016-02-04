@@ -25,12 +25,12 @@ let Header = React.createClass({
 
     getInitialState() {
         return {
-            transparency: 0,
             styles: {
                 header: {
                     position: "fixed",
                     backgroundColor: "rgba(0,0,0,0)",
-                    boxShadow: "none"
+                    boxShadow: "none",
+                    transition: "background-color .5s linear"
                 }
             }
         };
@@ -43,13 +43,9 @@ let Header = React.createClass({
     componentDidMount() {
         // fade app bar in on scroll
         window.addEventListener("scroll", () => {
-            var transparency = this.state.transparency,
-                newTransparency = Math.min(window.pageYOffset / 600, 0.7);
-            if(transparency !== newTransparency) {
-                var styles = this.state.styles;
-                styles.header.backgroundColor = "rgba(0,0,0," + newTransparency + ")";
-                this.setState({ transparency: newTransparency, styles: styles });
-            }
+            var state = this.state;
+            state.styles.header.backgroundColor = window.pageYOffset > 200 ? "rgba(20,20,20,1)" : "rgba(0,0,0,0)";
+            this.setState(state);
         });
     },
 
