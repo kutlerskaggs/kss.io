@@ -110,6 +110,12 @@ li:before{
     cursor: pointer;
 }
 
+@media (max-width: 991px) {
+    .hide-touch {
+        display: none;
+    }
+}
+
 /* Theater cursor */
 
 @-webkit-keyframes blink {

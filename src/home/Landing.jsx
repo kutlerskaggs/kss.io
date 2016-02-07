@@ -7,8 +7,23 @@ let styles = {
 
     },
     greeting: {
-        minHeight: 240,
-        display: "inline-block"
+        minHeight: 500,
+        maxWidth: 600,
+        display: "inline-block",
+        fontSize: "6rem",
+        textAlign: "top",
+        "@media (max-width: 991px)": {
+            fontSize: "5rem",
+            minHeight: 400
+        },
+        "@media (max-width: 500px)": {
+            fontSize: "4rem",
+            minHeight: 300
+        },
+        "@media (max-width: 400px)": {
+            fontSize: "3rem",
+            minHeight: 200
+        }
     }
 };
 
@@ -27,7 +42,7 @@ let Portfolio = React.createClass({
     componentDidMount() {
         // setup typed.js
         var theater = theaterJS(),
-            greeting = window.innerWidth <= 414 ? "PROBLEM<br/>SOLVING<br/>WITH<br/>LOGIC" : "PROBLEM SOLVING WITH LOGIC";
+            greeting = window.innerWidth <= 100000 ? "PROBLEM<br/>SOLVING<br/>WITH<br/>LOGIC" : "PROBLEM SOLVING WITH LOGIC";
         theater
             .addActor("landing", { speed: 1, accuracy: 0.8 })
             .addScene("landing:", 1000, greeting, 1000, -5, "INNOVATION", 1300, -10, "TENACITY", 1500, -8, "SOFTWARE");
@@ -36,8 +51,8 @@ let Portfolio = React.createClass({
     render() {
         return (
             <div className="container-fluid">
-                <div className="row middle-xs" style={styles.main}>
-                    <div className="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+                <div id={this.props.id} className="row middle-xs" style={styles.main}>
+                    <div className="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
                         <h2 style={styles.greeting}><span id="landing" className="theater-cursor"></span></h2>
                     </div>
                 </div>

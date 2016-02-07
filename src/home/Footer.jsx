@@ -6,10 +6,19 @@ let styles = {
 
     },
     main: {
-        height: 400
+        height: 400,
+        "@media (max-width: 991px)": {
+            height: 200
+        }
     },
     social: {
-        padding: 30
+        padding: 30,
+        "@media (max-width: 991px)": {
+            padding: 15
+        },
+        "@media (max-width: 400px)": {
+            padding: 5
+        }
     }
 };
 

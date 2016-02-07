@@ -5,6 +5,12 @@ let styles = {
     amatic: {
         fontFamily: "Amatic SC"
     },
+    icon: {
+        width: "auto",
+        "@media (max-width: 991px)": {
+            height: 90
+        }
+    },
     wrapper: {
 
     },
@@ -54,7 +60,7 @@ let About = React.createClass ({
                     <div className="col-xs-12 col-md-3 row center-xs">
                         <div style={styles.process.itemWrapper}>
                             <div>
-                                <i className="fa fa-circle fa-fw fa-5x"></i>
+                                <img style={styles.icon} src="images/chat.png"/>
                             </div>
                             <h3 style={styles.amatic} className="thin">Chat</h3>
                             <h6 style={styles.process.body}>Understand your needs and provide the best options for your unique problem or idea.</h6>
@@ -64,7 +70,7 @@ let About = React.createClass ({
                     <div className="col-xs-12 col-md-3 row center-xs">
                         <div style={styles.process.itemWrapper}>
                             <div>
-                                <i className="fa fa-circle fa-fw fa-5x"></i>
+                                <img style={styles.icon} src="images/design.png"/>
                             </div>
                             <h3 style={styles.amatic} className="thin">Design</h3>
                             <h6 style={styles.process.body}>Together we create the perfect prototype of your app before a line of code is written.</h6>
@@ -74,7 +80,7 @@ let About = React.createClass ({
                     <div className="col-xs-12 col-md-3 row center-xs">
                         <div style={styles.process.itemWrapper}>
                             <div>
-                                <i className="fa fa-circle fa-fw fa-5x"></i>
+                                <img style={styles.icon} src="images/build.png"/>
                             </div>
                             <h3 style={styles.amatic} className="thin">Build</h3>
                             <h6 style={styles.process.body}>We create your masterpiece based on the prototype specifications and deploy your app to reliable, secure servers.</h6>
@@ -84,7 +90,7 @@ let About = React.createClass ({
                     <div className="col-xs-12 col-md-3 row center-xs">
                         <div style={styles.process.itemWrapper}>
                             <div>
-                                <i className="fa fa-circle fa-fw fa-5x"></i>
+                                <img style={styles.icon} src="images/maintain.png"/>
                             </div>
                             <h3 style={styles.amatic} className="thin">Maintain</h3>
                             <h6 style={styles.process.body}>Let us keep your app happy and healthy so you can stress about other things.</h6>
