@@ -41,11 +41,10 @@ let Portfolio = React.createClass({
 
     componentDidMount() {
         // setup typed.js
-        var theater = theaterJS(),
-            greeting = window.innerWidth <= 100000 ? "PROBLEM<br/>SOLVING<br/>WITH<br/>LOGIC" : "PROBLEM SOLVING WITH LOGIC";
+        var theater = theaterJS();
         theater
             .addActor("landing", { speed: 1, accuracy: 0.8 })
-            .addScene("landing:", 1000, greeting, 1000, -5, "INNOVATION", 1300, -10, "TENACITY", 1500, -8, "SOFTWARE");
+            .addScene("landing:", 1000, "PROBLEM<br/>SOLVING<br/>WITH<br/>LOGIC", 1000, -5, "INNOVATION", 1300, -10, "TENACITY", 1500, -8, "SOFTWARE");
     },
 
     render() {

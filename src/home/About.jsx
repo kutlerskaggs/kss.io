@@ -1,5 +1,6 @@
 import React from "react";
 import Radium from "radium";
+import WindowMixin from "../mixins/window.jsx";
 import AtvImg from "react-atv-img";
 
 let styles = {
@@ -7,10 +8,14 @@ let styles = {
         fontFamily: "Amatic SC"
     },
     image: {
-        width: "300px",
-        height: "300px",
+        width: 300,
+        height: 300,
         borderRadius: 5,
-        margin: "1.68rem 0 2.1rem 0"
+        margin: "1.68rem 0 2.1rem 0",
+        "@media (max-width: 991px)": {
+            width: 200,
+            height: 200
+        }
     },
     main: {
         padding: "50px 0px"
@@ -80,6 +85,8 @@ function toggleUser(member) {
 
 let Team = React.createClass ({
 
+    mixins: [WindowMixin],
+
     contextTypes: {
         muiTheme: React.PropTypes.object
     },
@@ -110,37 +117,48 @@ let Team = React.createClass ({
 
                         <div className="flex center-xs end-md col-xs-12 col-md-4">
                             <a className="pointer" onClick={toggleUser.bind(this, "B")}>
-                                <AtvImg
-                                    layers={[
-                                        "images/Bcloseup.png"
-                                    ]}
-                                    isStatic={false}
-                                    style={styles.image}
-                                />
+                                {this.state.window.isTablet || this.state.window.isMobile ?
+                                    <section class="container">
+                                        <div id="card">
+                                            <figure class="front">1</figure>
+                                            <figure class="back">2</figure>
+                                        </div>
+                                    </section>
+                                    :
+                                    <AtvImg
+                                        layers={["images/Bcloseup.png"]}
+                                        isStatic={false}
+                                        style={styles.image}
+                                    />
+                                }
                             </a>
                         </div>
 
                         <div className="flex center-xs col-xs-12 col-md-4">
                             <a className="pointer" onClick={toggleUser.bind(this, "T")}>
-                                <AtvImg
-                                    layers={[
-                                        "images/Tcloseup.png"
-                                    ]}
-                                    isStatic={false}
-                                    style={styles.image}
-                                />
+                                {this.state.window.isTablet || this.state.window.isMobile ?
+                                    <img src="images/Tcloseup.png" style={styles.image} />
+                                    :
+                                    <AtvImg
+                                        layers={["images/Tcloseup.png"]}
+                                        isStatic={false}
+                                        style={styles.image}
+                                    />
+                                }
                             </a>
                         </div>
 
                         <div className="flex center-xs start-md col-xs-12 col-md-4">
                             <a className="pointer" onClick={toggleUser.bind(this, "C")}>
-                                <AtvImg
-                                    layers={[
-                                        "images/Ccloseup.png"
-                                    ]}
-                                    isStatic={false}
-                                    style={styles.image}
-                                />
+                                {this.state.window.isTablet || this.state.window.isMobile ?
+                                    <img src="images/Ccloseup.png" style={styles.image} />
+                                    :
+                                    <AtvImg
+                                        layers={["images/Ccloseup.png"]}
+                                        isStatic={false}
+                                        style={styles.image}
+                                    />
+                                }
                             </a>
                         </div>
                     </div>

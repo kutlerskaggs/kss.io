@@ -25,7 +25,11 @@ let styles = {
     },
     macbook: {
         width: "100%",
-        height: "auto"
+        height: "auto",
+        transform: "translateY(250px)",
+        "@media(max-width: 991px)": {
+            transform: "translateY(0px)"
+        }
     },
     text: {
         lineHeight: "30px"
@@ -50,16 +54,28 @@ let Portfolio = React.createClass({
     },
 
     componentDidMount() {
-        var wrapperEl = document.getElementById("iphoneWrapper"),
-            iphoneEl = document.getElementById("iphone");
-        // watch scroll
-        window.addEventListener("scroll", () => {
-            let top = wrapperEl.getBoundingClientRect().top,
-                height = window.innerHeight,
-                diff = 449 + top - height;
-            diff = Math.min(Math.max(diff, 0), 250);
-            iphoneEl.style.transform = "translateY(" + diff + "px)";
-        });
+
+        if(window.innerWidth > 991) {
+            var iphoneWrapperEl = document.getElementById("iphoneWrapper"),
+                macbookWrapperEl = document.getElementById("macbookWrapper"),
+                iphoneEl = document.getElementById("iphone"),
+                macbookEl = document.getElementById("macbook");
+
+            // slide macbook and iphone up
+            window.addEventListener("scroll", () => {
+
+                let iphoneTop = iphoneWrapperEl.getBoundingClientRect().top,
+                    macbookTop = macbookWrapperEl.getBoundingClientRect().top,
+                    height = window.innerHeight,
+                    iphoneDiff = 449 + iphoneTop - height,
+                    macbookDiff = 449 + macbookTop - height;
+
+                iphoneDiff = Math.min(Math.max(iphoneDiff, 0), 250);
+                macbookDiff = Math.min(Math.max(macbookDiff, 0), 250);
+                iphoneEl.style.transform = "translateY(" + iphoneDiff + "px)";
+                macbookEl.style.transform = "translateY(" + macbookDiff + "px)";
+            });
+        }
     },
 
     render() {
@@ -89,8 +105,8 @@ let Portfolio = React.createClass({
                         </h6>
                     </div>
 
-                    <div className="col-xs-12 col-md-8">
-                        <img src="images/macbook.png" style={styles.macbook}></img>
+                    <div id="macbookWrapper" className="col-xs-12 col-md-8">
+                        <img id="macbook" src="images/macbook.png" style={styles.macbook}></img>
                     </div>
                     <div id="iphoneWrapper" style={styles.iphoneWrapper} className="col-xs-12 col-md-4">
                         <img id="iphone" src="images/iphone.png" style={styles.iphone}></img>
