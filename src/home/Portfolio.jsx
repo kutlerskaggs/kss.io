@@ -8,6 +8,13 @@ let styles = {
     company: {
         margin: "1rem 0px 2rem 0px"
     },
+    database: {
+        width: "100%",
+        height: "auto",
+        "@media(max-width: 991px)": {
+            display: "none"
+        }
+    },
     iphone: {
         width: "60%",
         height: "auto",
@@ -122,7 +129,7 @@ let Portfolio = React.createClass({
                         </div>
                     </div>
                     <div className="col-xs-12 col-md-4">
-
+                        <img src="images/cubes.png" style={styles.database}></img>
                     </div>
                 </div>
             </div>

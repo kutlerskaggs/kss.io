@@ -5,6 +5,10 @@ import Home from "../home/Home.jsx";
 import RawMuiTheme from "../styles/theme"; // material ui theme
 import "../styles/styles.jsx"; // css
 
+// temporary material-ui dependency
+import injectTapEventPlugin from "react-tap-event-plugin";
+injectTapEventPlugin();
+
 const App = React.createClass({
 
     childContextTypes : {

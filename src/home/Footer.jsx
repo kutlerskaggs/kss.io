@@ -13,11 +13,9 @@ let styles = {
     },
     social: {
         padding: 30,
+        transition: "color 200ms",
         "@media (max-width: 991px)": {
             padding: 15
-        },
-        "@media (max-width: 400px)": {
-            padding: 5
         }
     }
 };
@@ -45,16 +43,12 @@ let About = React.createClass ({
                             <i className="fa fa-github fa-fw fa-3x"></i>
                         </a>
 
+                        <a key="medium" style={styles.social} href="https://medium.com/@kutlerskaggs" tabIndex="0">
+                            <i className="fa fa-medium fa-fw fa-3x"></i>
+                        </a>
+
                         <a key="twitter" style={styles.social} href="https://twitter.com/kutlerskaggs" tabIndex="0">
                             <i className="fa fa-twitter fa-fw fa-3x"></i>
-                        </a>
-
-                        <a key="facebook" style={styles.social} href="https://facebook.com/kutlerskaggs" tabIndex="0">
-                            <i className="fa fa-facebook fa-fw fa-3x"></i>
-                        </a>
-
-                        <a key="linkedin" style={styles.social} href="https://linkedin.com/company/kutlerskaggs" tabIndex="0">
-                            <i className="fa fa-linkedin fa-fw fa-3x"></i>
                         </a>
                     </div>
                 </div>

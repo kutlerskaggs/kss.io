@@ -20,7 +20,10 @@ let styles = {
         height: 64
     },
     mobileNav: {
-
+        fontFamily: "Amatic SC",
+        fontSize: 32,
+        paddingTop: 5,
+        paddingBottom: 5
     }
 };
 
@@ -83,12 +86,12 @@ let Header = React.createClass({
     render() {
         let items = this.props.items.map((item) => {
             return (
-                <FlatButton label={item.label} key={item.key} onClick={navigate.bind(this, item.key)}/>
+                <FlatButton label={item.label} key={item.key} hoverColor="inherit" onTouchTap={navigate.bind(this, item.key)}/>
             );
         });
         let mobileItems = this.props.items.map((item) => {
             return (
-                <MenuItem style={styles.mobileNav} key={item.key} onClick={navigate.bind(this, item.key, true)}>{item.label}</MenuItem>
+                <MenuItem style={styles.mobileNav} key={item.key} onTouchTap={navigate.bind(this, item.key, true)}>{item.label}</MenuItem>
             );
         });
 
@@ -98,7 +101,7 @@ let Header = React.createClass({
                     title={<span style={styles.title}>KutlerSkaggs</span>}
                     className="kss-header"
                     showMenuIconButton={false}
-                    iconElementRight={ this.state.showDesktopNav ? <div className="flex" style={styles.headerItems}>{items}</div> : <div className="flex" style={styles.headerItems}><IconButton onClick={this.handleToggle}><FontIcon className="material-icons" color={styles.title.color}>menu</FontIcon></IconButton></div> }
+                    iconElementRight={ this.state.showDesktopNav ? <div className="flex" style={styles.headerItems}>{items}</div> : <div className="flex" style={styles.headerItems}><IconButton onTouchTap={this.handleToggle}><FontIcon className="material-icons" color={styles.title.color}>menu</FontIcon></IconButton></div> }
                     iconStyleRight={styles.rightElement}
                     style={this.state.styles.header}
                 />

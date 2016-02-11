@@ -21,7 +21,7 @@
     "react-addons-css-transition-group": "^0.14.7",
     "react-atv-img": "^0.1.1",
     "react-dom": "0.14.6",
-    "react-tap-event-plugin": "0.2.1",
+    "react-tap-event-plugin": "^0.2.1",
     "superagent": "^1.7.2",
     "theaterjs": "2.0.1",
     "velocity-animate": "1.2.3"

@@ -16,6 +16,7 @@ let styles = {
         marginBottom: "2.1rem",
         maxWidth: 414,
         "@media (max-width: 991px)": {
+            marginTop: 0,
             marginLeft: "auto",
             marginRight: "auto"
         }
