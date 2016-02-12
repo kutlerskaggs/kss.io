@@ -9,7 +9,7 @@ let styles = {
         margin: "1rem 0px 2rem 0px"
     },
     database: {
-        width: "100%",
+        width: "80%",
         height: "auto",
         "@media(max-width: 991px)": {
             display: "none"
@@ -128,7 +128,7 @@ let Portfolio = React.createClass({
                             </h6>
                         </div>
                     </div>
-                    <div className="col-xs-12 col-md-4">
+                    <div className="flex middle-md center-md col-xs-12 col-md-4">
                         <img src="images/cubes.png" style={styles.database}></img>
                     </div>
                 </div>

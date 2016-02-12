@@ -1,14 +1,22 @@
 import React from "react";
 import AppBar from "material-ui/lib/app-bar";
 import FlatButton from "material-ui/lib/flat-button";
-import IconButton from "material-ui/lib/icon-button";
-import FontIcon from "material-ui/lib/font-icon";
 import LeftNav from "material-ui/lib/left-nav";
 import MenuItem from "material-ui/lib/menus/menu-item";
+import FloatingActionButton from "material-ui/lib/floating-action-button";
+import MenuIcon from "material-ui/lib/svg-icons/navigation/menu";
 import Velocity from "velocity-animate";
 
 
 let styles = {
+    brand: {
+        position: "absolute",
+        top: 15,
+        left: 15,
+        height: 40,
+        lineHeight: "40px",
+        fontSize: "1.7rem"
+    },
     title: {
 
     },
@@ -20,15 +28,38 @@ let styles = {
         height: 64
     },
     mobileNav: {
+        backgroundColor: "#151515"
+    },
+    mobileNavItem: {
+        display: "inline-block",
         fontFamily: "Amatic SC",
         fontSize: 32,
         paddingTop: 5,
         paddingBottom: 5
+    },
+    mobileNavItemIcon: {
+        padding: "14px 0px 14px 15px",
+        height: 30,
+        float: "left"
+    },
+    mobileNavHeader: {
+        height: 75,
+        padding: 20,
+        fontSize: "1.2rem"
+    },
+    mobileNavOverlay: {
+        backgroundColor: "rgba(200,200,200,.54)"
+    },
+    openMobileNav: {
+        position: "fixed",
+        top: 15,
+        right: 15,
+        zIndex: 999
     }
 };
 
 function navigate(id, closeMobileNav) {
-    Velocity(document.getElementById(id), "scroll", { duration: 750, offset: -63, easing: "easeInOutCubic" });
+    Velocity(document.getElementById(id), "scroll", { duration: 750, offset: this.state.showDesktopNav ? -63 : 0, easing: "easeInOutCubic" });
     if(closeMobileNav) {
         this.setState({open: false})
     }
@@ -62,7 +93,8 @@ let Header = React.createClass({
     componentWillMount() {
         let palette = this.context.muiTheme.rawTheme.palette;
         styles.title.color = palette.textColor;
-        styles.mobileNav.color = palette.alternateTextColor;
+        styles.mobileNavHeader.color = palette.alternateTextColor;
+        styles.mobileNavHeader.backgroundColor = palette.accent3Color;
     },
 
     componentDidMount() {
@@ -91,20 +123,34 @@ let Header = React.createClass({
         });
         let mobileItems = this.props.items.map((item) => {
             return (
-                <MenuItem style={styles.mobileNav} key={item.key} onTouchTap={navigate.bind(this, item.key, true)}>{item.label}</MenuItem>
+                <div>
+                    <img style={styles.mobileNavItemIcon} src={["images/menu_", item.key, ".png"].join("")} />
+                    <MenuItem style={styles.mobileNavItem} key={item.key} onTouchTap={navigate.bind(this, item.key, true)}>{item.label}</MenuItem>
+                </div>
             );
         });
+        mobileItems.unshift(<div style={styles.mobileNavHeader}>KutlerSkaggs</div>);
 
         return (
             <div>
-                <AppBar
-                    title={<span style={styles.title}>KutlerSkaggs</span>}
-                    className="kss-header"
-                    showMenuIconButton={false}
-                    iconElementRight={ this.state.showDesktopNav ? <div className="flex" style={styles.headerItems}>{items}</div> : <div className="flex" style={styles.headerItems}><IconButton onTouchTap={this.handleToggle}><FontIcon className="material-icons" color={styles.title.color}>menu</FontIcon></IconButton></div> }
-                    iconStyleRight={styles.rightElement}
-                    style={this.state.styles.header}
-                />
+                {this.state.showDesktopNav ?
+                    <AppBar
+                        title={<span style={styles.title}>KutlerSkaggs</span>}
+                        className="kss-header"
+                        showMenuIconButton={false}
+                        iconElementRight={<div className="flex" style={styles.headerItems}>{items}</div>}
+                        iconStyleRight={styles.rightElement}
+                        style={this.state.styles.header}
+                    />
+                    :
+                    <div>
+                        <div style={styles.brand}>{!this.state.open ? "KutlerSkaggs" : ""}</div>
+                        <FloatingActionButton mini={true} style={styles.openMobileNav} backgroundColor="white" onTouchTap={this.handleToggle}>
+                          <MenuIcon />
+                        </FloatingActionButton>
+                    </div>
+                }
+
 
                 <LeftNav
                     docked={false}
@@ -112,6 +158,8 @@ let Header = React.createClass({
                     openRight={true}
                     open={this.state.open}
                     onRequestChange={open => this.setState({open})}
+                    style={styles.mobileNav}
+                    overlayStyle={styles.mobileNavOverlay}
                 >
                     {mobileItems}
                 </LeftNav>
