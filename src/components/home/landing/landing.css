@@ -1,0 +1,26 @@
+/* CSS functionality that isn't currently possible with react/babel-plugin-css-in-js */
+
+/* Theater cursor */
+
+@-webkit-keyframes blink {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes blink {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.landing-theater-cursor::after {
+  content: '|';
+  -webkit-animation: blink 750ms infinite;
+          animation: blink 750ms infinite;
+}

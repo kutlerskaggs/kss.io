@@ -6,7 +6,7 @@ import ReactDOM from "react-dom";
 // import injectTapEventPlugin from "react-tap-event-plugin";
 
 // our app's entry point
-import App from "./app/App.jsx";
+import App from "./components/App.jsx";
 
 // render our app"s root component
 ReactDOM.render(<App/>, document.getElementById("app"));

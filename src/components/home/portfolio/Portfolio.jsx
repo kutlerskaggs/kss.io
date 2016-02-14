@@ -1,12 +1,17 @@
-import React from "react";
-import Radium from "radium";
+/* global cssInJS, palette */
 
-let styles = {
-    amatic: {
-        fontFamily: "Amatic SC"
-    },
+import React from "react";
+
+/* TODO iphone/cube showing on iPhone 4....? */
+
+// static classes
+let classes = cssInJS({
     company: {
         margin: "1rem 0px 2rem 0px"
+    },
+    businessIntelligence: {
+        display: "flex",
+        textAlign: "start"
     },
     database: {
         width: "80%",
@@ -14,6 +19,9 @@ let styles = {
         "@media(max-width: 991px)": {
             display: "none"
         }
+    },
+    databaseWrapper: {
+        display: "flex"
     },
     iphone: {
         width: "60%",
@@ -24,9 +32,11 @@ let styles = {
         }
     },
     iphoneWrapper: {
+        display: "flex",
         textAlign: "center"
     },
     main: {
+        color: palette.textColor,
         paddingTop: 50,
         paddingBottom: 50
     },
@@ -38,35 +48,31 @@ let styles = {
             transform: "translateY(0px)"
         }
     },
+    macbookWrapper: {
+        display: "flex"
+    },
     text: {
         lineHeight: "30px"
     },
     webApp: {
-        paddingLeft: "3rem",
+        textAlign: "start",
+        paddingLeft: "3rem !important",
         "@media(max-width: 991px)": {
-            paddingLeft: "1rem"
+            paddingLeft: "1rem !important"
         }
     }
-};
+});
 
 let Portfolio = React.createClass({
 
-    contextTypes: {
-        muiTheme: React.PropTypes.object
-    },
-
-    componentWillMount() {
-        var muiTheme = this.context.muiTheme.rawTheme;
-        styles.main.color = muiTheme.palette.textColor;
-    },
-
     componentDidMount() {
 
+        let iphoneWrapperEl = document.getElementById("iphoneWrapper"),
+            macbookWrapperEl = document.getElementById("macbookWrapper"),
+            iphoneEl = document.getElementById("iphone"),
+            macbookEl = document.getElementById("macbook");
+
         if(window.innerWidth > 991) {
-            var iphoneWrapperEl = document.getElementById("iphoneWrapper"),
-                macbookWrapperEl = document.getElementById("macbookWrapper"),
-                iphoneEl = document.getElementById("iphone"),
-                macbookEl = document.getElementById("macbook");
 
             // slide macbook and iphone up
             window.addEventListener("scroll", () => {
@@ -82,22 +88,24 @@ let Portfolio = React.createClass({
                 iphoneEl.style.transform = "translateY(" + iphoneDiff + "px)";
                 macbookEl.style.transform = "translateY(" + macbookDiff + "px)";
             });
+        } else {
+            iphoneEl.style.transform = "translateY(0px)";
+            macbookEl.style.transform = "translateY(0px)";
         }
     },
 
     render() {
         return (
-            <div id={this.props.id} style={styles.main} className="container-fluid">
+            <div id={this.props.id} className={classes.main + " container-fluid"}>
                 <div className="row center-xs">
                     <h1>PORTFOLIO</h1>
                 </div>
 
-                <div className="row">
-                    {/* Add col-sm-offset-2 col-sm-8 col-md-offset-0 after hearing back on flexboxgrid issue opened */}
-                    <div style={styles.webApp} className="col-lg-offset-0 col-xs-12 col-md-4">
-                        <h3 style={styles.company}>Westmoreland Coal Co.</h3>
-                        <h3 style={styles.amatic}>Web Application</h3>
-                        <h6 style={styles.text}>
+                <div className="row start-xs center-sm start-md">
+                    <div className={"col-xs-12 col-sm-8 col-md-4 " + classes.webApp}>
+                        <h3 className={classes.company}>Westmoreland Coal Co.</h3>
+                        <h3 className="amatic">Web Application</h3>
+                        <h6 className={classes.text}>
                             <p>We had the opportunity to build an enterprise web app for Westmoreland that has enabled management to keep a closer eye on their Key Performance Indicators.</p>
                             Features:
                             <ul>
@@ -112,24 +120,27 @@ let Portfolio = React.createClass({
                         </h6>
                     </div>
 
-                    <div id="macbookWrapper" className="col-xs-12 col-md-8">
-                        <img id="macbook" src="images/macbook.png" style={styles.macbook}></img>
-                    </div>
-                    <div id="iphoneWrapper" style={styles.iphoneWrapper} className="col-xs-12 col-md-4">
-                        <img id="iphone" src="images/iphone.png" style={styles.iphone}></img>
-                    </div>
-                    {/* Add col-sm-offset-2 col-sm-8 col-md-offset-0 after hearing back on flexboxgrid issue opened */}
-                    <div className="flex middle-xs col-xs-12 col-md-4">
+                    <div id="macbookWrapper" className={["col-xs-12 col-md-8 middle-xs", classes.macbookWrapper].join(" ")}>
                         <div>
-                            <h3 style={styles.amatic}>Business Intelligence</h3>
-                            <h6 style={styles.text}>
+                            <img id="macbook" src="images/macbook.png" className={classes.macbook}></img>
+                        </div>
+                    </div>
+                    <div id="iphoneWrapper" className={["col-xs-12 col-md-4 middle-xs", classes.iphoneWrapper].join(" ")}>
+                        <div>
+                            <img id="iphone" src="images/iphone.png" className={classes.iphone}></img>
+                        </div>
+                    </div>
+                    <div className={["middle-xs col-xs-12 col-sm-8 col-md-4", classes.businessIntelligence].join(" ")}>
+                        <div>
+                            <h3 className="amatic">Business Intelligence</h3>
+                            <h6 className={classes.text}>
                                 <p>Additionally, we were given the chance to build a complete business intelligence platform which aggregates data from three disparate ERP systems located throughout North America.</p>
                                 <p>This setup allows for wide visibility and deep analysis of the company's operations which would otherwise be very cumbersome.</p>
                             </h6>
                         </div>
                     </div>
-                    <div className="flex middle-md center-md col-xs-12 col-md-4">
-                        <img src="images/cubes.png" style={styles.database}></img>
+                    <div className={["middle-md center-md col-xs-12 col-md-4", classes.databaseWrapper].join(" ")}>
+                        <img src="images/cubes.png" className={classes.database}></img>
                     </div>
                 </div>
             </div>
@@ -138,4 +149,4 @@ let Portfolio = React.createClass({
 
 });
 
-export default Radium(Portfolio);
+export default Portfolio;

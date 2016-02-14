@@ -1,4 +1,5 @@
-var path = require('path');
+var path = require("path");
+    theme = require("./src/styles/theme");
 
 module.exports = {
     entry: "./src/index.js",
@@ -22,9 +23,15 @@ module.exports = {
         loaders: [
             {
                 test: /.jsx?$/,
-                loader: "babel-loader",
+                loader: "babel",
                 exclude: /node_modules/,
                 query: {
+                    plugins: [["css-in-js", {
+                        "vendorPrefixes": true,
+                        "bundleFile": "dist/bundle.css",
+                        "minify": true,
+                        "context": theme
+                    }]],
                     presets: ["es2015", "react"]
                 }
             }, {

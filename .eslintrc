@@ -11,6 +11,7 @@
   "rules": {
     "no-console": 0,
     "new-cap": 0,
+    "semi": 2,
     "strict": 0,
     "no-underscore-dangle": 0,
     "no-use-before-define": 0,

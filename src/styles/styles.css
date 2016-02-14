@@ -84,6 +84,7 @@ small {
   font-size: 75%;
 }
 
+/* use font awesome checks for lists */
 ul {
     list-style-type: none;
     padding-left: 20px;
@@ -95,15 +96,13 @@ li:before{
     margin-right: 10px;
 }
 
-.thin {
-    font-weight: 300;
+/* goofy font */
+.amatic {
+    font-family: "Amatic SC"
 }
 
-.flex {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
+.thin {
+    font-weight: 300;
 }
 
 .pointer {
@@ -115,32 +114,6 @@ li:before{
         display: none;
     }
 }
-
-/* Theater cursor */
-
-@-webkit-keyframes blink {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes blink {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-.theater-cursor::after {
-  content: '|';
-  -webkit-animation: blink 750ms infinite;
-          animation: blink 750ms infinite;
-}
-
 
 /* Card flip */
 

@@ -1,13 +1,13 @@
 import React from "react";
 
 // components
-import Header from "../app/Header.jsx";
-import Landing from "./Landing.jsx";
-import Process from "./Process.jsx";
-import Portfolio from "./Portfolio.jsx";
-import About from "./About.jsx";
-import Contact from "./Contact.jsx";
-import Footer from "./Footer.jsx";
+import Header from "./header/Header.jsx";
+import Landing from "./landing/Landing.jsx";
+import Process from "./process/Process.jsx";
+import Portfolio from "./portfolio/Portfolio.jsx";
+import About from "./about/About.jsx";
+import Contact from "./contact/Contact.jsx";
+import Footer from "./footer/Footer.jsx";
 
 const Home = React.createClass({
 

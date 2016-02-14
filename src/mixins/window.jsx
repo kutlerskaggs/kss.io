@@ -12,7 +12,7 @@ export default {
                 isTablet: width > 414 && width <= 991,
                 isMobile: width <= 414
             }
-        })
+        });
     },
 
     componentWillMount() {
@@ -36,4 +36,4 @@ export default {
             }
         };
     }
-}
+};

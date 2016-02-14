@@ -1,9 +1,9 @@
-import Colors from "material-ui/lib/styles/colors";
-import ColorManipulator from "material-ui/lib/utils/color-manipulator";
-import Spacing from "material-ui/lib/styles/spacing";
-import zIndex from "material-ui/lib/styles/zIndex";
+var Colors = require("material-ui/lib/styles/colors"),
+    ColorManipulator = require("material-ui/lib/utils/color-manipulator"),
+    Spacing = require("material-ui/lib/styles/spacing"),
+    zIndex = require("material-ui/lib/styles/zIndex");
 
-export default {
+module.exports = {
     spacing: Spacing,
     zIndex: zIndex,
     fontFamily: "Roboto, sans-serif",
