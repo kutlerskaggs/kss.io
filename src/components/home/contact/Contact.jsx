@@ -3,7 +3,6 @@
 import React from "react";
 import TextField from "material-ui/lib/text-field";
 import RaisedButton from "material-ui/lib/raised-button";
-import Snackbar from "material-ui/lib/snackbar";
 import theme from "../../../styles/theme";
 import request from "superagent";
 
@@ -34,6 +33,21 @@ let classes = cssInJS({
         paddingTop: 50,
         paddingBottom: 50
     },
+    notification: {
+        padding: 15,
+        fontSize: "1.2rem",
+        color: palette.alternateTextColor,
+        borderRadius: "5px",
+        backgroundColor: "#fff"
+    },
+    notificationWrapper: {
+        position: "fixed",
+        left: 0,
+        bottom: 0,
+        padding: 20,
+        transform: "translate(-100%)",
+        transition: "transform 500ms"
+    },
     form: {
         textAlign: "inherit",
         marginBottom: 20
@@ -41,19 +55,18 @@ let classes = cssInJS({
     text: {
         textAlign: "initial",
         lineHeight: "30px"
+    },
+    thanksWrapper: {
+        color: "#fff",
+        transition: "opacity 1500ms linear",
+        maxWidth: 414
+    },
+    thanks: {
+        height: "100%",
+        width: "100%",
+        zIndex: 100
     }
 });
-
-let styles = {
-    snackbarError: {
-        fontSize: "1.2rem"
-    },
-    snackbarSuccess: {
-        fontSize: "1.2rem",
-        backgroundColor: "#333",
-        color: "white"
-    }
-};
 
 let spreadStyles = {
     textField: {
@@ -84,8 +97,16 @@ let Contact = React.createClass ({
 
     getInitialState() {
         return {
-            openSuccess: false,
-            openError: false
+            formSubmitted: false,
+            styles: {
+                formWrapper: {
+                    display: "block"
+                },
+                thanksWrapper: {
+                    display: "none",
+                    opacity: 0
+                }
+            }
         };
     },
 
@@ -103,19 +124,37 @@ let Contact = React.createClass ({
 
     sendMessage(e) {
         e.preventDefault();
+        this.setState({ formSubmitted: true });
 
         request
             .post("https://ym6uexi6tc.execute-api.us-west-2.amazonaws.com/prod/kss-io_contact_dynamo")
             .set("Content-Type", "application/json")
-            .set("Authorization", "NONE")
             .accept("application/json")
             .send(this.state)
             .end((err) => {
                 if(err) {
-                    /* TODO decide what to do here ... replace form with message? */
-                    this.setState({ openError: true });
+                    // reset form
+                    this.setState({ formSubmitted: false });
+                    // display notification
+                    let el = document.getElementById("error-notification");
+                    el.style.transform = "translate(0%)";
+                    setTimeout(() => el.style.transform = "", 4000);
                 } else {
-                    this.setState({ openSuccess: true });
+                    // clear form and show thank you
+                    this.setState({
+                        name: "",
+                        email: "",
+                        message: "",
+                        styles: {
+                            formWrapper: {
+                                display: "none"
+                            },
+                            thanksWrapper: {
+                                display: "block",
+                                opacity: 1 /* TODO this isn't fading in */
+                            }
+                        }
+                    });
                 }
             });
     },
@@ -142,33 +181,26 @@ let Contact = React.createClass ({
                     </div>
 
                     <div className="col-xs-12 col-md-6">
-                        <form className={classes.content} onSubmit={this.sendMessage}>
-                            <TextField {...spreadStyles.textField} floatingLabelText="Name" required value={this.state.name} onChange={this.handleChange.bind(this, "name")} />
-                            <TextField {...spreadStyles.textField} floatingLabelText="Email" required value={this.state.email} onChange={this.handleChange.bind(this, "email")} />
-                            <TextField {...spreadStyles.textField} floatingLabelText="Message" multiLine={true} required value={this.state.message} onChange={this.handleChange.bind(this, "message")} />
+                        <form className={classes.content} style={this.state.styles.formWrapper} onSubmit={this.sendMessage}>
+                            <TextField {...spreadStyles.textField} disabled={this.state.formSubmitted} floatingLabelText="Name" required value={this.state.name} onChange={this.handleChange.bind(this, "name")} />
+                            <TextField {...spreadStyles.textField} disabled={this.state.formSubmitted} floatingLabelText="Email" required value={this.state.email} onChange={this.handleChange.bind(this, "email")} />
+                            <TextField {...spreadStyles.textField} disabled={this.state.formSubmitted} floatingLabelText="Message" multiLine={true} required value={this.state.message} onChange={this.handleChange.bind(this, "message")} />
                             <br/>
                             <div className="flex end-xs">
-                                <RaisedButton {...spreadStyles.raisedButton} type="submit" label="Send" />
+                                <RaisedButton {...spreadStyles.raisedButton} disabled={this.state.formSubmitted} type="submit" label="Send" />
                             </div>
                         </form>
+
+                        <div className={classes.thanksWrapper} style={this.state.styles.thanksWrapper}>
+                            <object id="thanks" className={classes.thanks} type="image/svg+xml" data="images/thanks.svg"></object>
+                        </div>
                     </div>
                 </div>
-
-                <Snackbar
-                    open={this.state.openSuccess}
-                    message="We'll be in touch shortly!"
-                    autoHideDuration={4000}
-                    onRequestClose={this.handleSnackbarClose.bind(this, "openSuccess")}
-                    bodyStyle={styles.snackbarSuccess}
-                />
-
-                <Snackbar
-                    open={this.state.openError}
-                    message="Ugh...we ran into a little trouble sending your message."
-                    autoHideDuration={4000}
-                    onRequestClose={this.handleSnackbarClose.bind(this, "openError")}
-                    bodyStyle={styles.snackbarError}
-                />
+                <div id="error-notification" className={classes.notificationWrapper}>
+                    <div className={classes.notification}>
+                        Ugh...we ran into a little trouble sending your message.
+                    </div>
+                </div>
             </div>
         );
     }

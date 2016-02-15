@@ -74,7 +74,6 @@ let classes = cssInJS({
     offScreenWrapper: {
         backgroundColor: "#fff",
         transition: "transform 500ms",
-        WebkitTransition: "transform 500ms", // can this be deleted ... autoprefixer?
         position: "absolute",
         top: 0,
         right: 0,
