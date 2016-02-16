@@ -18,36 +18,36 @@ let classes = cssInJS({
         margin: "1.68rem 0 2.1rem 0",
         cursor: "pointer"
     },
-    flipContainer: {
+    cardContainer: {
         margin: "1.68rem 0 2.1rem 0",
-        width: 200,
-        height: 200,
-        position: "relative",
-        perspective: "800px"
+        width: 225,
+        height: 285,
+        boxShadow: "0 1px 6px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.12)",
+        borderRadius: 2,
+        overflow: "hidden",
+        position: "relative"
     },
-    flipCard: {
+    cardContent: {
+        display: "flex",
+        alignItems: "center"
+    },
+    cardTitle: {
+        flex: 1,
+        marginLeft: 15
+    },
+    cardImage: {
         width: "100%",
-        height: "100%",
-        position: "absolute",
-        transformStyle: "preserve-3d",
-        transition: "transform 1s"
+        height: "auto",
+        verticalAlign: "bottom"
     },
-    flipFace: {
-        borderRadius: 5,
-        margin: 0,
-        display: "block",
-        position: "absolute",
-        width: "100%",
+    cardReveal: {
         height: "100%",
-        backfaceVisibility: "hidden"
-    },
-    flipBack: {
-        color: palette.alternateTextColor,
         backgroundColor: "#fff",
-        transform: "rotateY(180deg)"
-    },
-    flipped: {
-        transform: "rotateY(180deg)"
+        padding: "10px 5px",
+        fontSize: "2.25rem",
+        textAlign: "left",
+        transition: "transform 300ms",
+        color: palette.alternateTextColor
     },
     main: {
         color: palette.textColor,
@@ -134,18 +134,14 @@ function memberClicked(member) {
     let state = this.state,
         _state = {};
 
-    if(state.window.isTablet || state.window.isMobile) {
-        this.setState({memberFlipped: state.memberFlipped === member ? undefined : member });
+    if(state.offScreen.transform) {
+        _state.offScreen = { transform: "" };
+        _state.currentMember = members[member];
+        Velocity(document.getElementById("offScreen"), "scroll", { duration: 1000, offset: -63, easing: "easeInOutCubic" });
     } else {
-        if(state.offScreen.transform) {
-            _state.offScreen = { transform: "" };
-            _state.currentMember = members[member];
-            Velocity(document.getElementById("offScreen"), "scroll", { duration: 1000, offset: -63, easing: "easeInOutCubic" });
-        } else {
-            _state.offScreen = { transform: "translate(100%)" };
-        }
-        this.setState(_state);
+        _state.offScreen = { transform: "translate(100%)" };
     }
+    this.setState(_state);
 }
 
 let Team = React.createClass ({
@@ -154,9 +150,19 @@ let Team = React.createClass ({
 
     getInitialState() {
         return {
+            revealB: false,
+            revealC: false,
+            revealT: false,
             currentMember: { images: {} },
             offScreen: { transform: "translate(100%)" }
         };
+    },
+
+    reveal(member) {
+        member = "reveal" + member;
+        let state = {};
+        state[member] = !this.state[member];
+        this.setState(state);
     },
 
     render() {
@@ -174,27 +180,25 @@ let Team = React.createClass ({
                             let member = members[memberId];
                             return (
                                 <div key={memberId} className={["center-xs col-xs-12 col-md-4", member.class, classes.memberWrapper].join(" ")}>
-                                    <a onTouchTap={memberClicked.bind(this, memberId)}>
-                                        {this.state.window.isTablet || this.state.window.isMobile ?
-                                            <div className={classes.flipContainer}>
-                                                <div className={[classes.flipCard, this.state.memberFlipped === memberId ? classes.flipped : ""].join(" ")}>
-                                                    <img src={member.images.small} className={classes.flipFace} />
-                                                    <div className={[classes.flipFace, classes.flipBack].join(" ")}>
-                                                        <h1 className={classes.amatic}>{member.name}</h1>
-                                                        <h6>
-                                                            <p>{member.title}</p>
-                                                        </h6>
-                                                    </div>
+                                    {this.state.window.isTablet || this.state.window.isMobile ?
+                                        <div className={classes.cardContainer}>
+                                            <img src={member.images.small} className={classes.cardImage} />
+                                            <div className={classes.cardReveal} style={this.state["reveal" + memberId] ? { transform: "translateY(-225px)" } : {}}>
+                                                <div className={[classes.cardContent, classes.amatic].join(" ")}>
+                                                    <span className={classes.cardTitle}>{member.name}</span>
+                                                    <i className={this.state["reveal" + memberId] ? "fa fa-fw fa-1x fa-angle-down" : "fa fa-fw fa-1x fa-angle-up"} onTouchTap={this.reveal.bind(this, memberId)}></i>
                                                 </div>
                                             </div>
-                                            :
+                                        </div>
+                                        :
+                                        <a onTouchTap={memberClicked.bind(this, memberId)}>
                                             <AtvImg
                                                 layers={[member.images.small]}
                                                 isStatic={false}
                                                 className={classes.image}
                                             />
-                                        }
-                                    </a>
+                                        </a>
+                                    }
                                 </div>
                             );
                         })}
