@@ -5,7 +5,6 @@ import WindowMixin from "../../../mixins/window.jsx";
 import AtvImg from "react-atv-img";
 import Velocity from "velocity-animate";
 
-/* TODO pictures off center on iPhone 4 */
 
 let classes = cssInJS({
     amatic: {
@@ -17,6 +16,9 @@ let classes = cssInJS({
         borderRadius: 5,
         margin: "1.68rem 0 2.1rem 0",
         cursor: "pointer"
+    },
+    cardBody: {
+        padding: "15px"
     },
     cardContainer: {
         margin: "1.68rem 0 2.1rem 0",
@@ -33,7 +35,8 @@ let classes = cssInJS({
     },
     cardTitle: {
         flex: 1,
-        marginLeft: 15
+        marginLeft: 15,
+        fontSize: "2.25rem"
     },
     cardImage: {
         width: "100%",
@@ -44,7 +47,6 @@ let classes = cssInJS({
         height: "100%",
         backgroundColor: "#fff",
         padding: "10px 5px",
-        fontSize: "2.25rem",
         textAlign: "left",
         transition: "transform 300ms",
         color: palette.alternateTextColor
@@ -98,7 +100,7 @@ let members = {
             small: "images/Bcloseup.png",
             large: "images/B.png"
         },
-        short: "Founder/Developer",
+        short: "Born in the city, moved to suburbia, moved to the country, became a CPA, moved across the country, became a developer, cofounded a rad company.",
         body1: "Originally a CPA, I ended up in tech by combining 1 part curiosity with 1 part necessity.",
         body2: "Having been born with an extreme distaste for inefficiency and finding it everywhere in the business world I began exploring ways to address this internal conflict.",
         body3: "Ultimately I discovered software and have been intoxicated by the endless possibilities ever since."
@@ -110,7 +112,7 @@ let members = {
             small: "images/Ccloseup.png",
             large: "images/C.png"
         },
-        short: "Founder/Developer",
+        short: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         body1: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         body2: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
         body3: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
@@ -123,7 +125,7 @@ let members = {
             small: "images/Tcloseup.png",
             large: "images/T.png"
         },
-        short: "Designer",
+        short: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         body1: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         body2: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
         body3: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
@@ -159,7 +161,7 @@ let Team = React.createClass ({
     },
 
     reveal(member) {
-        member = "reveal" + member;
+        member = `reveal${member}`;
         let state = {};
         state[member] = !this.state[member];
         this.setState(state);
@@ -168,8 +170,8 @@ let Team = React.createClass ({
     render() {
         return (
             <div className={classes.outerWrapper}>
-                <div className={"container-fluid " + classes.wrapper}>
-                    <div id={this.props.id} className={"row center-xs " + classes.main}>
+                <div className={`container-fluid ${classes.wrapper}`}>
+                    <div id={this.props.id} className={`row center-xs ${classes.main}`}>
 
                         <div className="col-xs-12 col-sm-10">
                             <h1>WHO?</h1>
@@ -183,10 +185,14 @@ let Team = React.createClass ({
                                     {this.state.window.isTablet || this.state.window.isMobile ?
                                         <div className={classes.cardContainer}>
                                             <img src={member.images.small} className={classes.cardImage} />
-                                            <div className={classes.cardReveal} style={this.state["reveal" + memberId] ? { transform: "translateY(-225px)" } : {}}>
+                                            <div className={classes.cardReveal} style={this.state[`reveal${memberId}`] ? { transform: "translateY(-225px)" } : {}}>
                                                 <div className={[classes.cardContent, classes.amatic].join(" ")}>
                                                     <span className={classes.cardTitle}>{member.name}</span>
-                                                    <i className={this.state["reveal" + memberId] ? "fa fa-fw fa-1x fa-angle-down" : "fa fa-fw fa-1x fa-angle-up"} onTouchTap={this.reveal.bind(this, memberId)}></i>
+                                                    <i className={this.state[`reveal${memberId}`] ? "fa fa-fw fa-2x fa-angle-down" : "fa fa-fw fa-2x fa-angle-up"} onTouchTap={this.reveal.bind(this, memberId)}></i>
+                                                </div>
+                                                <div className={classes.cardBody}>
+                                                    <h6>{member.title}</h6>
+                                                    <p>{member.short}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -205,9 +211,9 @@ let Team = React.createClass ({
                     </div>
                 </div>
 
-                <div id="offScreen" className={"container-fluid " + classes.offScreenWrapper} style={this.state.offScreen}>
-                    <i className={"fa fa-close fa-fw fa-3x pointer " + classes.offScreenClose} onTouchTap={memberClicked.bind(this)}></i>
-                    <div className={"row center-xs " + classes.main}>
+                <div id="offScreen" className={`container-fluid${classes.offScreenWrapper}`} style={this.state.offScreen}>
+                    <i className={`fa fa-close fa-fw fa-3x pointer${classes.offScreenClose}`} onTouchTap={memberClicked.bind(this)}></i>
+                    <div className={`row center-xs ${classes.main}`}>
                         <div className="col-xs-12 col-md-6">
                             <img className={classes.imageLarge} src={this.state.currentMember.images.large} />
                         </div>
