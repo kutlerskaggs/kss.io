@@ -33,15 +33,15 @@ let About = React.createClass ({
             <div className={"container-fluid " + classes.wrapper}>
                 <div className={"row middle-xs center-xs " + classes.main}>
                     <div className="col-xs-12">
-                        <a key="github" className={classes.social} href="https://github.com/kutlerskaggs" tabIndex="0">
+                        <a key="github" className={classes.social} href="https://github.com/kutlerskaggs" tabIndex="-1">
                             <i className="fa fa-github fa-fw fa-3x"></i>
                         </a>
 
-                        <a key="medium" className={classes.social} href="https://medium.com/@kutlerskaggs" tabIndex="0">
+                        <a key="medium" className={classes.social} href="https://medium.com/@kutlerskaggs" tabIndex="-1">
                             <i className="fa fa-medium fa-fw fa-3x"></i>
                         </a>
 
-                        <a key="twitter" className={classes.social} href="https://twitter.com/kutlerskaggs" tabIndex="0">
+                        <a key="twitter" className={classes.social} href="https://twitter.com/kutlerskaggs" tabIndex="-1">
                             <i className="fa fa-twitter fa-fw fa-3x"></i>
                         </a>
                     </div>

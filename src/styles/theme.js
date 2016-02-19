@@ -1,12 +1,8 @@
-var Colors = require("material-ui/lib/styles/colors"),
-    ColorManipulator = require("material-ui/lib/utils/color-manipulator"),
-    Spacing = require("material-ui/lib/styles/spacing"),
-    zIndex = require("material-ui/lib/styles/zIndex");
+/* overrides to Material-UI theme */
+
+var Colors = require("material-ui/lib/styles/colors");
 
 module.exports = {
-    spacing: Spacing,
-    zIndex: zIndex,
-    fontFamily: "Roboto, sans-serif",
     palette: {
         primary1Color: Colors.white,
         primary2Color: Colors.cyan700,
@@ -15,10 +11,6 @@ module.exports = {
         accent2Color: "#45cba1",
         accent3Color: Colors.yellowA700,
         textColor: Colors.grey200,
-        alternateTextColor: Colors.grey800,
-        canvasColor: Colors.white,
-        borderColor: Colors.grey300,
-        disabledColor: ColorManipulator.fade(Colors.darkBlack, 0.3),
-        pickerHeaderColor: Colors.cyan500
+        alternateTextColor: Colors.grey800
     }
 };

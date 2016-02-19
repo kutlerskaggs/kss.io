@@ -43,8 +43,6 @@
     "expect": "^1.14.0",
     "expect-jsx": "^2.3.0",
     "font-awesome-webpack": "0.0.4",
-    "html-loader": "^0.4.3",
-    "jade-loader": "^0.8.0",
     "mocha": "^2.4.5",
     "mocha-loader": "^0.7.1",
     "react-addons-test-utils": "^0.14.7",

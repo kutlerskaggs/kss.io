@@ -27,6 +27,7 @@ let classes = cssInJS({
         transition: "background-color .5s linear !important"
     },
     brand: {
+        color: palette.textColor,
         position: "absolute",
         top: 15,
         left: 15,

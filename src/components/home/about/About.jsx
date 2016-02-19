@@ -69,6 +69,7 @@ let classes = cssInJS({
         top: 0,
         right: 0,
         transition: "color 500ms",
+        color: "#C7C7C7",
         ":hover": {
             color: palette.alternateTextColor
         }
@@ -211,8 +212,8 @@ let Team = React.createClass ({
                     </div>
                 </div>
 
-                <div id="offScreen" className={`container-fluid${classes.offScreenWrapper}`} style={this.state.offScreen}>
-                    <i className={`fa fa-close fa-fw fa-3x pointer${classes.offScreenClose}`} onTouchTap={memberClicked.bind(this)}></i>
+                <div id="offScreen" className={`container-fluid ${classes.offScreenWrapper}`} style={this.state.offScreen}>
+                    <i className={`fa fa-close fa-fw fa-3x pointer ${classes.offScreenClose}`} onTouchTap={memberClicked.bind(this)}></i>
                     <div className={`row center-xs ${classes.main}`}>
                         <div className="col-xs-12 col-md-6">
                             <img className={classes.imageLarge} src={this.state.currentMember.images.large} />
