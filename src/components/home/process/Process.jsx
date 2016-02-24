@@ -1,6 +1,7 @@
 /* global cssInJS, palette */
 
 import React from "react";
+import WindowMixin from "../../../mixins/window.jsx";
 import Vivus from "vivus";
 
 // static classes
@@ -59,12 +60,19 @@ let steps = [{
 
 let About = React.createClass ({
 
+    mixins: [WindowMixin],
+
     animateSvg(step) {
-        this[step].reset().play();
+        let _step = this[step];
+        if(_step) {
+            _step.reset().play();
+        }
     },
 
     componentDidMount() {
-        steps.forEach(step => this[step.id] = new Vivus(step.id, {duration: 50, type: "async", delay: 0}));
+        if(!this.state.window.isTablet && !this.state.window.isMobile) {
+            steps.forEach(step => this[step.id] = new Vivus(step.id, {duration: 50, type: "async", delay: 0}));
+        }
     },
 
     render() {
@@ -82,7 +90,7 @@ let About = React.createClass ({
                             <div key={step.id} className="col-xs-12 col-md-3 row center-xs">
                                 <div className={classes.itemWrapper}>
                                     <div>
-                                        <object className={classes.icon} id={step.id} type="image/svg+xml" data={step.image} onMouseOver={this.animateSvg.bind(this, step.id)}></object>
+                                        <object className={classes.icon} id={step.id} type="image/svg+xml" data={step.image} onMouseOver={this.animateSvg.bind(null, step.id)}></object>
                                     </div>
                                     <h3 className="amatic">{step.title}</h3>
                                     <h6 className={classes.itemBody}>{step.body}</h6>

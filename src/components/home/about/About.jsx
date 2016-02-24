@@ -1,8 +1,8 @@
 /* global cssInJS, palette */
 
 import React from "react";
-import WindowMixin from "../../../mixins/window.jsx";
 import AtvImg from "react-atv-img";
+import WindowMixin from "../../../mixins/window.jsx";
 import Velocity from "velocity-animate";
 
 
@@ -18,7 +18,7 @@ let classes = cssInJS({
         cursor: "pointer"
     },
     cardBody: {
-        padding: "15px"
+        padding: 15
     },
     cardContainer: {
         margin: "1.68rem 0 2.1rem 0",
@@ -133,21 +133,7 @@ let members = {
     }
 };
 
-function memberClicked(member) {
-    let state = this.state,
-        _state = {};
-
-    if(state.offScreen.transform) {
-        _state.offScreen = { transform: "" };
-        _state.currentMember = members[member];
-        Velocity(document.getElementById("offScreen"), "scroll", { duration: 1000, offset: -63, easing: "easeInOutCubic" });
-    } else {
-        _state.offScreen = { transform: "translate(100%)" };
-    }
-    this.setState(_state);
-}
-
-let Team = React.createClass ({
+let About = React.createClass ({
 
     mixins: [WindowMixin],
 
@@ -159,6 +145,20 @@ let Team = React.createClass ({
             currentMember: { images: {} },
             offScreen: { transform: "translate(100%)" }
         };
+    },
+
+    memberClicked(member) {
+        let state = this.state,
+            newState = {};
+
+        if(state.offScreen.transform) {
+            newState.offScreen = { transform: "" };
+            newState.currentMember = members[member];
+            Velocity(document.getElementById("offScreen"), "scroll", { duration: 1000, offset: -63, easing: "easeInOutCubic" });
+        } else {
+            newState.offScreen = { transform: "translate(100%)" };
+        }
+        this.setState(newState);
     },
 
     reveal(member) {
@@ -189,7 +189,7 @@ let Team = React.createClass ({
                                             <div className={classes.cardReveal} style={this.state[`reveal${memberId}`] ? { transform: "translateY(-225px)" } : {}}>
                                                 <div className={[classes.cardContent, classes.amatic].join(" ")}>
                                                     <span className={classes.cardTitle}>{member.name}</span>
-                                                    <i className={this.state[`reveal${memberId}`] ? "fa fa-fw fa-2x fa-angle-down" : "fa fa-fw fa-2x fa-angle-up"} onTouchTap={this.reveal.bind(this, memberId)}></i>
+                                                    <i className={this.state[`reveal${memberId}`] ? "fa fa-fw fa-2x fa-angle-down" : "fa fa-fw fa-2x fa-angle-up"} onTouchTap={this.reveal.bind(null, memberId)}></i>
                                                 </div>
                                                 <div className={classes.cardBody}>
                                                     <h6>{member.title}</h6>
@@ -198,7 +198,7 @@ let Team = React.createClass ({
                                             </div>
                                         </div>
                                         :
-                                        <a onTouchTap={memberClicked.bind(this, memberId)}>
+                                        <a onTouchTap={this.memberClicked.bind(null, memberId)}>
                                             <AtvImg
                                                 layers={[member.images.small]}
                                                 isStatic={false}
@@ -213,7 +213,7 @@ let Team = React.createClass ({
                 </div>
 
                 <div id="offScreen" className={`container-fluid ${classes.offScreenWrapper}`} style={this.state.offScreen}>
-                    <i className={`fa fa-close fa-fw fa-3x pointer ${classes.offScreenClose}`} onTouchTap={memberClicked.bind(this)}></i>
+                    <i className={`fa fa-close fa-fw fa-3x pointer ${classes.offScreenClose}`} onTouchTap={this.memberClicked.bind(null, undefined)}></i>
                     <div className={`row center-xs ${classes.main}`}>
                         <div className="col-xs-12 col-md-6">
                             <img className={classes.imageLarge} src={this.state.currentMember.images.large} />
@@ -235,4 +235,4 @@ let Team = React.createClass ({
     }
 });
 
-export default Team;
+export default About;

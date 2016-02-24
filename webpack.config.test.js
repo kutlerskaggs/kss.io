@@ -11,8 +11,7 @@ var environment = {
     },
     output: {
         path: path.resolve(__dirname, "tests"),
-        filename: "test.build.js",
-        publicPath: "/tests/"
+        filename: "test.build.js"
     }
 };
 

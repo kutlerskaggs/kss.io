@@ -94,24 +94,6 @@ let styles = {
 };
 
 
-/**
- * scrollToId - scroll to top of element
- *
- * @param  {string} id              element id to scroll to top
- * @param  {boolean} closeMobileNav whether or not to close mobile side nav
- */
-function scrollToId(id, closeMobileNav) {
-    let el = document.getElementById(id);
-    // offset header if full nav is shown
-    let options = { duration: 750, offset: this.state.showDesktopNav ? -63 : 0, easing: "easeInOutCubic" };
-    Velocity(el, "scroll", options);
-    // close mobileNav
-    if(closeMobileNav) {
-        this.setState({mobileNavOpen: false});
-    }
-}
-
-
 let Header = React.createClass({
 
     // which navbar should we show?
@@ -159,6 +141,22 @@ let Header = React.createClass({
         window.removeEventListener("scroll", this.handleScroll);
     },
 
+    /**
+     * scrollToId - scroll to top of element
+     *
+     * @param  {string} id              element id to scroll to top
+     * @param  {boolean} closeMobileNav whether or not to close mobile side nav
+     */
+    scrollToId(id, closeMobileNav) {
+        let el = document.getElementById(id);
+        // offset header if full nav is shown
+        let options = { duration: 750, offset: this.state.showDesktopNav ? -63 : 0, easing: "easeInOutCubic" };
+        Velocity(el, "scroll", options);
+        // close mobileNav
+        if(closeMobileNav) {
+            this.setState({mobileNavOpen: false});
+        }
+    },
 
     render() {
 
@@ -166,7 +164,7 @@ let Header = React.createClass({
 
         let desktopItems = this.props.items.map((item) => {
             return (
-                <FlatButton label={item.label} key={item.key} labelStyle={styles.desktopItem} hoverColor="inherit" onTouchTap={scrollToId.bind(this, item.key)}/>
+                <FlatButton label={item.label} key={item.key} labelStyle={styles.desktopItem} hoverColor="inherit" onTouchTap={this.scrollToId.bind(null, item.key)}/>
             );
         });
 
@@ -174,7 +172,7 @@ let Header = React.createClass({
             return (
                 <div key={item.key}>
                     <img className={classes.mobileMenuItemIcon} src={["images/menu_", item.key, ".png"].join("")} />
-                    <MenuItem className={classes.mobileMenuItem} onTouchTap={scrollToId.bind(this, item.key, true)}>{item.label}</MenuItem>
+                    <MenuItem className={classes.mobileMenuItem} onTouchTap={this.scrollToId.bind(null, item.key, true)}>{item.label}</MenuItem>
                 </div>
             );
         });

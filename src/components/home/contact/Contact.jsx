@@ -3,6 +3,7 @@
 import React from "react";
 import TextField from "material-ui/lib/text-field";
 import RaisedButton from "material-ui/lib/raised-button";
+import LinearProgress from "material-ui/lib/linear-progress";
 import theme from "../../../styles/theme";
 import request from "superagent";
 
@@ -52,13 +53,22 @@ let classes = cssInJS({
         textAlign: "inherit",
         marginBottom: 20
     },
+    formOuterWrapper: {
+        position: "relative",
+        "@media(max-width: 991px)": {
+            minHeight: 320,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center"
+        }
+    },
     text: {
         textAlign: "initial",
         lineHeight: "30px"
     },
     thanksWrapper: {
         color: "#fff",
-        transition: "opacity 1500ms linear",
+        transition: "opacity 1s linear",
         maxWidth: 414
     },
     thanks: {
@@ -102,9 +112,16 @@ let Contact = React.createClass ({
                 formWrapper: {
                     display: "block"
                 },
+                progress: {
+                    opacity: 0,
+                    marginTop: 10
+                },
                 thanksWrapper: {
-                    display: "none",
-                    opacity: 0
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    opacity: 0,
+                    zIndex: -1
                 }
             }
         };
@@ -124,7 +141,12 @@ let Contact = React.createClass ({
 
     sendMessage(e) {
         e.preventDefault();
-        this.setState({ formSubmitted: true });
+        let styles = this.state.styles;
+        styles.progress.opacity = 1;
+        this.setState({
+            formSubmitted: true,
+            styles: styles
+        });
 
         request
             .post("https://ym6uexi6tc.execute-api.us-west-2.amazonaws.com/prod/kss-io_contact_dynamo")
@@ -150,8 +172,7 @@ let Contact = React.createClass ({
                                 display: "none"
                             },
                             thanksWrapper: {
-                                display: "block",
-                                opacity: 1 /* TODO this isn't fading in */
+                                opacity: 1
                             }
                         }
                     });
@@ -172,7 +193,7 @@ let Contact = React.createClass ({
                 </div>
 
                 <div id={this.props.id} className="row middle-xs">
-                    <div className={["end-md col-xs-12 col-md-6", classes.contentWrapper].join(" ")}>
+                    <div className={`end-md col-xs-12 col-md-6 ${classes.contentWrapper}`}>
                         <h6 className={[classes.content, classes.text].join(" ")}>
                             <p className="thin">If you like what you've seen so far and care to chat about your problems or ideas shoot us a quick message.</p>
                             <p className="thin">Maybe we can help you, maybe we can't. Either way the coffee is on us and you won't get a bullshit sales pitch.</p>
@@ -180,15 +201,15 @@ let Contact = React.createClass ({
                         </h6>
                     </div>
 
-                    <div className="col-xs-12 col-md-6">
+                    <div className={`col-xs-12 col-md-6 ${classes.formOuterWrapper}`}>
                         <form className={classes.content} style={this.state.styles.formWrapper} onSubmit={this.sendMessage}>
-                            <TextField {...spreadStyles.textField} disabled={this.state.formSubmitted} floatingLabelText="Name" required value={this.state.name} onChange={this.handleChange.bind(this, "name")} />
-                            <TextField {...spreadStyles.textField} disabled={this.state.formSubmitted} floatingLabelText="Email" required value={this.state.email} onChange={this.handleChange.bind(this, "email")} />
-                            <TextField {...spreadStyles.textField} disabled={this.state.formSubmitted} floatingLabelText="Message" multiLine={true} required value={this.state.message} onChange={this.handleChange.bind(this, "message")} />
-                            <br/>
+                            <TextField {...spreadStyles.textField} disabled={this.state.formSubmitted} floatingLabelText="Name" required value={this.state.name} onChange={this.handleChange.bind(null, "name")} />
+                            <TextField {...spreadStyles.textField} disabled={this.state.formSubmitted} floatingLabelText="Email" required value={this.state.email} onChange={this.handleChange.bind(null, "email")} />
+                            <TextField {...spreadStyles.textField} disabled={this.state.formSubmitted} floatingLabelText="Message" multiLine={true} required value={this.state.message} onChange={this.handleChange.bind(null, "message")} />
                             <div className="flex end-xs">
                                 <RaisedButton {...spreadStyles.raisedButton} disabled={this.state.formSubmitted} type="submit" label="Send" />
                             </div>
+                            <LinearProgress mode="indeterminate" style={this.state.styles.progress}/>
                         </form>
 
                         <div className={classes.thanksWrapper} style={this.state.styles.thanksWrapper}>
