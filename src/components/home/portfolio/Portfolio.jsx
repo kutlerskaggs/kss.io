@@ -96,13 +96,15 @@ let Portfolio = React.createClass({
 
     render() {
         return (
-            <div id={this.props.id} className={classes.main + " container-fluid"}>
+            <div id={this.props.id} className={`${classes.main} container-fluid`}>
+
                 <div className="row center-xs">
                     <h1>PORTFOLIO</h1>
                 </div>
 
                 <div className="row start-xs center-sm start-md">
-                    <div className={"col-xs-12 col-sm-8 col-md-4 " + classes.webApp}>
+
+                    <div className={`col-xs-12 col-sm-8 col-md-4 ${classes.webApp}`}>
                         <h3 className={classes.company}>Westmoreland Coal Co.</h3>
                         <h3 className="amatic">Web Application</h3>
                         <h6 className={classes.text}>
@@ -120,17 +122,19 @@ let Portfolio = React.createClass({
                         </h6>
                     </div>
 
-                    <div id="macbookWrapper" className={["col-xs-12 col-md-8 middle-xs", classes.macbookWrapper].join(" ")}>
+                    <div id="macbookWrapper" className={`col-xs-12 col-md-8 middle-xs ${classes.macbookWrapper}`}>
                         <div>
                             <img id="macbook" src="images/macbook.png" className={classes.macbook}></img>
                         </div>
                     </div>
-                    <div id="iphoneWrapper" className={["col-xs-12 col-md-4 middle-xs", classes.iphoneWrapper].join(" ")}>
+
+                    <div id="iphoneWrapper" className={`col-xs-12 col-md-4 middle-xs ${classes.iphoneWrapper}`}>
                         <div>
                             <img id="iphone" src="images/iphone.png" className={classes.iphone}></img>
                         </div>
                     </div>
-                    <div className={["middle-xs col-xs-12 col-sm-8 col-md-4", classes.businessIntelligence].join(" ")}>
+
+                    <div className={`middle-xs col-xs-12 col-sm-8 col-md-4 ${classes.businessIntelligence}`}>
                         <div>
                             <h3 className="amatic">Business Intelligence</h3>
                             <h6 className={classes.text}>
@@ -139,7 +143,8 @@ let Portfolio = React.createClass({
                             </h6>
                         </div>
                     </div>
-                    <div className={["middle-md center-md col-xs-12 col-md-4", classes.databaseWrapper].join(" ")}>
+
+                    <div className={`middle-md center-md col-xs-12 col-md-4 ${classes.databaseWrapper}`}>
                         <img src="images/cubes.png" className={classes.database}></img>
                     </div>
                 </div>

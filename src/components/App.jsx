@@ -1,7 +1,7 @@
 /* global cssInJS */
 
 import React from "react";
-import WindowMixin from "../mixins/window.jsx";
+import WindowMixin from "../mixins/window";
 
 // root component and global styles
 import Home from "./home/Home.jsx";

@@ -2,7 +2,7 @@
 
 import React from "react";
 import AtvImg from "react-atv-img";
-import WindowMixin from "../../../mixins/window.jsx";
+import WindowMixin from "../../../mixins/window";
 import Velocity from "velocity-animate";
 
 

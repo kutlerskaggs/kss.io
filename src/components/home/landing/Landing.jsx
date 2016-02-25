@@ -51,7 +51,7 @@ let Portfolio = React.createClass({
     render() {
         return (
             <div className="container-fluid">
-                <div id={this.props.id} style={styles.main} className={classes.main + " row middle-xs"}>
+                <div id={this.props.id} style={styles.main} className={`${classes.main} row middle-xs`}>
                     <div className="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
                         <h2 className={classes.greeting}><span id="landing" className="landing-theater-cursor"></span></h2>
                     </div>

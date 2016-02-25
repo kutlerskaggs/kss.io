@@ -30,8 +30,8 @@ let About = React.createClass ({
 
     render() {
         return (
-            <div className={"container-fluid " + classes.wrapper}>
-                <div className={"row middle-xs center-xs " + classes.main}>
+            <div className={`container-fluid ${classes.wrapper}`}>
+                <div className={`row middle-xs center-xs ${classes.main}`}>
                     <div className="col-xs-12">
                         <a key="github" className={classes.social} href="https://github.com/kutlerskaggs" tabIndex="-1">
                             <i className="fa fa-github fa-fw fa-3x"></i>

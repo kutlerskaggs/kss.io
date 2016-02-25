@@ -1,2 +1,5 @@
-require("../src/components/home/Home.test.jsx");
-require("../src/components/App.test.jsx");
+function requireAll(requireContext) {
+  requireContext.keys().forEach(requireContext);
+}
+
+requireAll(require.context("../src", true, /\.test.(js|jsx)/));

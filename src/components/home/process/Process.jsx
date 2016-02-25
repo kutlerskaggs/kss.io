@@ -1,7 +1,7 @@
 /* global cssInJS, palette */
 
 import React from "react";
-import WindowMixin from "../../../mixins/window.jsx";
+import WindowMixin from "../../../mixins/window";
 import Vivus from "vivus";
 
 // static classes
