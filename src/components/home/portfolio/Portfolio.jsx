@@ -1,8 +1,8 @@
 /* global cssInJS, palette */
 
 import React from "react";
+import WindowMixin from "../../../mixins/window";
 
-/* TODO iphone/cube showing on iPhone 4....? */
 
 // static classes
 let classes = cssInJS({
@@ -11,7 +11,7 @@ let classes = cssInJS({
     },
     businessIntelligence: {
         display: "flex",
-        textAlign: "start"
+        textAlign: "left"
     },
     database: {
         width: "80%",
@@ -55,7 +55,7 @@ let classes = cssInJS({
         lineHeight: "30px"
     },
     webApp: {
-        textAlign: "start",
+        textAlign: "left",
         paddingLeft: "3rem !important",
         "@media(max-width: 991px)": {
             paddingLeft: "1rem !important"
@@ -65,14 +65,17 @@ let classes = cssInJS({
 
 let Portfolio = React.createClass({
 
+    mixins: [WindowMixin],
+
     componentDidMount() {
 
-        let iphoneWrapperEl = document.getElementById("iphoneWrapper"),
+        let _window = this.state.window,
+            iphoneWrapperEl = document.getElementById("iphoneWrapper"),
             macbookWrapperEl = document.getElementById("macbookWrapper"),
             iphoneEl = document.getElementById("iphone"),
             macbookEl = document.getElementById("macbook");
 
-        if(window.innerWidth > 991) {
+        if(!_window.isMobile && !_window.isTablet) {
 
             // slide macbook and iphone up
             window.addEventListener("scroll", () => {
@@ -89,12 +92,34 @@ let Portfolio = React.createClass({
                 macbookEl.style.transform = "translateY(" + macbookDiff + "px)";
             });
         } else {
-            iphoneEl.style.transform = "translateY(0px)";
+            if(iphoneEl) {
+                iphoneEl.style.transform = "translateY(0px)";
+            }
             macbookEl.style.transform = "translateY(0px)";
         }
     },
 
     render() {
+
+        let iphone,
+            cubes,
+            _window = this.state.window;
+
+        if(!_window.isMobile && !_window.isTablet) {
+            iphone = (
+                <div id="iphoneWrapper" className={`col-xs-12 col-md-4 middle-xs ${classes.iphoneWrapper}`}>
+                    <div>
+                        <img id="iphone" src="images/iphone.png" className={classes.iphone}></img>
+                    </div>
+                </div>
+            );
+            cubes = (
+                <div className={`middle-md center-md col-xs-12 col-md-4 ${classes.databaseWrapper}`}>
+                    <img src="images/cubes.png" className={classes.database}></img>
+                </div>
+            );
+        }
+
         return (
             <div id={this.props.id} className={`${classes.main} container-fluid`}>
 
@@ -124,15 +149,11 @@ let Portfolio = React.createClass({
 
                     <div id="macbookWrapper" className={`col-xs-12 col-md-8 middle-xs ${classes.macbookWrapper}`}>
                         <div>
-                            <img id="macbook" src="images/macbook.png" className={classes.macbook}></img>
+                            <img id="macbook" src={`images/macbook${_window.isMobile ? "_mobile" : ""}.png`} className={classes.macbook}></img>
                         </div>
                     </div>
 
-                    <div id="iphoneWrapper" className={`col-xs-12 col-md-4 middle-xs ${classes.iphoneWrapper}`}>
-                        <div>
-                            <img id="iphone" src="images/iphone.png" className={classes.iphone}></img>
-                        </div>
-                    </div>
+                    {iphone}
 
                     <div className={`middle-xs col-xs-12 col-sm-8 col-md-4 ${classes.businessIntelligence}`}>
                         <div>
@@ -144,9 +165,8 @@ let Portfolio = React.createClass({
                         </div>
                     </div>
 
-                    <div className={`middle-md center-md col-xs-12 col-md-4 ${classes.databaseWrapper}`}>
-                        <img src="images/cubes.png" className={classes.database}></img>
-                    </div>
+                    {cubes}
+
                 </div>
             </div>
         );

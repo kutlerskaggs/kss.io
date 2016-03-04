@@ -13,21 +13,21 @@ import RawMuiTheme from "../styles/theme"; // material ui theme
 import injectTapEventPlugin from "react-tap-event-plugin"; // temporary material-ui dependency
 injectTapEventPlugin();
 
-/* TODO this isn't being picked up when a change is made to component in /home */
-/* TODO figure out the issue and submit a PR to fix it */
+
 let classes = cssInJS({
     background: {
         position: "fixed",
         top: 0,
         left: 0,
         width: "100%",
-        zIndex: -100,
+        //zIndex: -100,
+        transform: "translateZ(0)",
         backgroundPosition: "center center",
         backgroundRepeat: "no-repeat",
         backgroundAttachment: "fixed",
         backgroundSize: "cover"
     }
-});// comments
+});
 
 export default React.createClass({
 
@@ -38,15 +38,27 @@ export default React.createClass({
     },
 
     componentDidMount() {
-        let suffix = this.state.window.isMobile ? "_mobile" : this.state.window.isTablet ? "_tablet" : "";
+        let windowState = this.state.window,
+            suffix = windowState.isMobile ? "_mobile" : windowState.isTablet ? "_tablet" : windowState.isHighRes ? "_big" : "";
         this.setState({
             styles: {
                 background: {
                     backgroundImage: `url('../../images/beaver_creek${suffix}.jpg')`,
-                    height: `${window.innerHeight + 60}px`
+                    height: `${window.innerHeight + 120}px`
                 }
             }
         });
+
+        // fix issue on IE11 with jittery background image scrolling
+        if(navigator.userAgent.match(/Trident\/7\./)) {
+            document.addEventListener("mousewheel", this.scrollIE);
+        }
+    },
+
+    componentWillUnmount() {
+        if(navigator.userAgent.match(/Trident\/7\./)) {
+            document.removeEventListener("mousewheel", this.scrollIE);
+        }
     },
 
     getChildContext() {
@@ -67,8 +79,16 @@ export default React.createClass({
         return (
             <div>
                 <div className={classes.background} style={this.state.styles.background}></div>
-                <Home/>
+                <Home />
             </div>
         );
+    },
+
+    scrollIE(e) {
+        e.preventDefault();
+
+        let wheelDelta = e.wheelDelta,
+            currentScrollPosition = window.pageYOffset;
+        window.scrollTo(0, currentScrollPosition - wheelDelta);
     }
 });

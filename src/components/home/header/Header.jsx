@@ -164,7 +164,7 @@ let Header = React.createClass({
 
         let desktopItems = this.props.items.map((item) => {
             return (
-                <FlatButton label={item.label} key={item.key} labelStyle={styles.desktopItem} hoverColor="inherit" onTouchTap={this.scrollToId.bind(null, item.key)}/>
+                <FlatButton label={item.label} key={item.key} labelStyle={styles.desktopItem} hoverColor="rgba(0,0,0,0)" onTouchTap={this.scrollToId.bind(null, item.key)}/>
             );
         });
 

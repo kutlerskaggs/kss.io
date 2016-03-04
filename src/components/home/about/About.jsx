@@ -3,8 +3,6 @@
 import React from "react";
 import AtvImg from "react-atv-img";
 import WindowMixin from "../../../mixins/window";
-import Velocity from "velocity-animate";
-
 
 let classes = cssInJS({
     amatic: {
@@ -14,8 +12,7 @@ let classes = cssInJS({
         width: 300,
         height: 300,
         borderRadius: 5,
-        margin: "1.68rem 0 2.1rem 0",
-        cursor: "pointer"
+        margin: "1.68rem 0 2.1rem 0"
     },
     cardBody: {
         padding: 15
@@ -58,31 +55,6 @@ let classes = cssInJS({
     memberWrapper: {
         display: "flex"
     },
-    offScreenBody: {
-        color: palette.alternateTextColor,
-        textAlign: "initial",
-        maxWidth: 600
-    },
-    offScreenClose: {
-        position: "absolute",
-        padding: "1rem",
-        top: 0,
-        right: 0,
-        transition: "color 500ms",
-        color: "#C7C7C7",
-        ":hover": {
-            color: palette.alternateTextColor
-        }
-    },
-    offScreenWrapper: {
-        backgroundColor: "#fff",
-        transition: "transform 500ms",
-        position: "absolute",
-        top: 0,
-        right: 0,
-        bottom: 0,
-        left: 0
-    },
     wrapper: {
         backgroundColor: palette.accent2Color
     },
@@ -98,38 +70,26 @@ let members = {
         name: "Ben Schnelle",
         title: "Founder/Developer",
         images: {
-            small: "images/Bcloseup.png",
-            large: "images/B.png"
+            small: "images/Bcloseup.png"
         },
-        short: "Born in the city, moved to suburbia, moved to the country, became a CPA, moved across the country, became a developer, cofounded a rad company.",
-        body1: "Originally a CPA, I ended up in tech by combining 1 part curiosity with 1 part necessity.",
-        body2: "Having been born with an extreme distaste for inefficiency and finding it everywhere in the business world I began exploring ways to address this internal conflict.",
-        body3: "Ultimately I discovered software and have been intoxicated by the endless possibilities ever since."
+        short: "Born in the city, moved to suburbia, moved to the country, became a CPA, moved across the country, became a developer, cofounded a rad company."
     },
     C: {
         name: "Chris Ludden",
         title: "Founder/Developer",
         images: {
-            small: "images/Ccloseup.png",
-            large: "images/C.png"
+            small: "images/Ccloseup.png"
         },
-        short: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        body1: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        body2: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        body3: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        short: "Founding member of N.W.A. who more commonly goes by his stage name, Ice Cube. Lately he's been really into making terrible movies."
     },
     T: {
         class: "start-md",
         name: "Tasha Moreno",
         title: "Designer",
         images: {
-            small: "images/Tcloseup.png",
-            large: "images/T.png"
+            small: "images/Tcloseup.png"
         },
-        short: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        body1: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        body2: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-        body3: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+        short: "Moonlight designer who spends the majority of her time working with children, singing songs, and being really happy."
     }
 };
 
@@ -141,24 +101,13 @@ let About = React.createClass ({
         return {
             revealB: false,
             revealC: false,
-            revealT: false,
-            currentMember: { images: {} },
-            offScreen: { transform: "translate(100%)" }
+            revealT: false
         };
     },
 
-    memberClicked(member) {
-        let state = this.state,
-            newState = {};
-
-        if(state.offScreen.transform) {
-            newState.offScreen = { transform: "" };
-            newState.currentMember = members[member];
-            Velocity(document.getElementById("offScreen"), "scroll", { duration: 1000, offset: -63, easing: "easeInOutCubic" });
-        } else {
-            newState.offScreen = { transform: "translate(100%)" };
-        }
-        this.setState(newState);
+    isInternetExplorer() {
+        let userAgent = window.navigator.userAgent;
+        return userAgent.indexOf("MSIE ") !== -1 || userAgent.indexOf("Trident/") !== -1 || userAgent.indexOf("Edge/") !== -1;
     },
 
     reveal(member) {
@@ -198,36 +147,16 @@ let About = React.createClass ({
                                             </div>
                                         </div>
                                         :
-                                        <a onTouchTap={this.memberClicked.bind(null, memberId)}>
-                                            <AtvImg
-                                                layers={[member.images.small]}
-                                                isStatic={false}
-                                                className={classes.image}
-                                            />
-                                        </a>
+                                        <AtvImg
+                                            layers={[member.images.small]}
+                                            staticFallback={member.images.small}
+                                            isStatic={this.isInternetExplorer()}
+                                            className={classes.image}
+                                        />
                                     }
                                 </div>
                             );
                         })}
-                    </div>
-                </div>
-
-                <div id="offScreen" className={`container-fluid ${classes.offScreenWrapper}`} style={this.state.offScreen}>
-                    <i className={`fa fa-close fa-fw fa-3x pointer ${classes.offScreenClose}`} onTouchTap={this.memberClicked.bind(null, undefined)}></i>
-                    <div className={`row center-xs ${classes.main}`}>
-                        <div className="col-xs-12 col-md-6">
-                            <img className={classes.imageLarge} src={this.state.currentMember.images.large} />
-                        </div>
-                        <div className="col-xs-12 col-md-6">
-                            <div className={classes.offScreenBody}>
-                                <h1 className={classes.amatic}>{this.state.currentMember.name}</h1>
-                                <h6>
-                                    <p>{this.state.currentMember.body1}</p>
-                                    <p>{this.state.currentMember.body2}</p>
-                                    <p>{this.state.currentMember.body3}</p>
-                                </h6>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

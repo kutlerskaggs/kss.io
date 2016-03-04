@@ -38,7 +38,7 @@ let Portfolio = React.createClass({
 
     componentWillMount() {
         // fill 90% of page height
-        styles.main.minHeight = window.innerHeight * .9;
+        styles.main.height = Math.round(window.innerHeight * .9);
     },
 
     componentDidMount() {

@@ -5,6 +5,12 @@ var path = require("path"),
 // config overrides for test environment
 var environment = {
     entry: "mocha!./tests/index.js",
+    // enyzme config
+    externals: {
+        "cheerio": "window",
+        "react/lib/ExecutionEnvironment": true,
+        "react/lib/ReactContext": true
+    },
     devServer: {
         contentBase: "./tests",
         port: 8888

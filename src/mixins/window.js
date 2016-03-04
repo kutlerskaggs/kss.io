@@ -1,3 +1,4 @@
+/* TODO isn't this adding multiple event listeners for each location it is used in a component? */
 
 export default {
 
@@ -22,7 +23,8 @@ export default {
                 height: height,
                 width: width,
                 isTablet: width > 414 && width <= 991,
-                isMobile: width <= 414
+                isMobile: width <= 414,
+                isHighRes: width > 1920
             }
         };
     },

@@ -20,7 +20,7 @@ const Home = React.createClass({
             { label: "Contact", key: "contact" }
         ];
         return (
-            <div>
+            <div style={{position: "relative"}}>
                 <Header items={headerItems}/>
                 <Landing id="home"/>
                 <Process id="process"/>

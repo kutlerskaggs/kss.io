@@ -3,7 +3,7 @@
 import expect from "expect";
 import _WindowMixin from "../mixins/window";
 
-describe("WindowMixin", () => {
+describe("Mixin:Window", () => {
     let WindowMixin;
 
     beforeEach(() => {

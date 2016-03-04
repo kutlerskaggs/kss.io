@@ -62,6 +62,9 @@ let classes = cssInJS({
             justifyContent: "center"
         }
     },
+    send: {
+        textAlign: "right"
+    },
     text: {
         textAlign: "initial",
         lineHeight: "30px"
@@ -183,16 +186,16 @@ let Contact = React.createClass ({
     render() {
 
         return (
-            <div className={"container-fluid " + classes.main}>
+            <div id={this.props.id} className={"container-fluid " + classes.main}>
 
-                <div id={this.props.id} className="row center-xs">
+                <div className="row center-xs">
                     <div className="col-xs-12 col-sm-10">
                         <h1>CONTACT</h1>
                         <h3 className={classes.amatic}>Let's Get Coffee</h3>
                     </div>
                 </div>
 
-                <div id={this.props.id} className="row middle-xs">
+                <div className="row middle-xs">
                     <div className={`end-md col-xs-12 col-md-6 ${classes.contentWrapper}`}>
                         <h6 className={[classes.content, classes.text].join(" ")}>
                             <p className="thin">If you like what you've seen so far and care to chat about your problems or ideas shoot us a quick message.</p>
@@ -206,7 +209,7 @@ let Contact = React.createClass ({
                             <TextField {...spreadStyles.textField} disabled={this.state.formSubmitted} floatingLabelText="Name" required value={this.state.name} onChange={this.handleChange.bind(null, "name")} />
                             <TextField {...spreadStyles.textField} disabled={this.state.formSubmitted} floatingLabelText="Email" required value={this.state.email} onChange={this.handleChange.bind(null, "email")} />
                             <TextField {...spreadStyles.textField} disabled={this.state.formSubmitted} floatingLabelText="Message" multiLine={true} required value={this.state.message} onChange={this.handleChange.bind(null, "message")} />
-                            <div className="flex end-xs">
+                            <div className={`flex end-xs ${classes.send}`}>
                                 <RaisedButton {...spreadStyles.raisedButton} disabled={this.state.formSubmitted} type="submit" label="Send" />
                             </div>
                             <LinearProgress mode="indeterminate" style={this.state.styles.progress}/>

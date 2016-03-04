@@ -3,14 +3,21 @@
 html {
     font-family: 'Lato';
     background-color: #464646;
+    -webkit-font-smoothing: subpixel-antialiased;
+}
 
-    @media (min-width: 1441px) {
+@media (min-width: 1441px) {
+    html {
         font-size: 18px;
     }
-    @media (max-width: 1440px) {
+}
+@media (max-width: 1440px) {
+    html {
         font-size: 16px;
     }
-    @media (max-width: 991px) {
+}
+@media (max-width: 991px) {
+    html {
         font-size: 14px;
     }
 }
@@ -22,6 +29,10 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
   font-weight: inherit;
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+  -webkit-margin-start: 0;
+  -webkit-margin-end: 0;
 }
 
 h1 {
