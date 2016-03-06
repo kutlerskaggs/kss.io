@@ -44,8 +44,42 @@ let Portfolio = React.createClass({
     componentDidMount() {
         // setup theater.js
         theaterJS()
-            .addActor("landing", { speed: 1, accuracy: 0.8 })
-            .addScene("landing:", 1000, "PROBLEM<br/>SOLVING<br/>WITH<br/>LOGIC", 1000, -5, "INNOVATION", 1300, -10, "TENACITY", 1500, -8, "SOFTWARE");
+            .addActor("landing", { speed: 1, accuracy: 1 })
+            .addScene(
+                "landing:",
+                1000,
+                "PROBLEM<br/>",
+                "SOLVING<br/>",
+                "WITH",
+                500,
+                "<br/>LOGIC",
+                250,
+                -1,
+                120,
+                -4,
+                "INNOVAT",
+                250,
+                -1,
+                100,
+                -1,
+                100,
+                -1,
+                100,
+                -1,
+                100,
+                -1,
+                100,
+                -1,
+                100,
+                -1,
+                100,
+                "TENACITY",
+                400,
+                -1,
+                120,
+                -7,
+                "SOFTWARE"
+            );
     },
 
     render() {

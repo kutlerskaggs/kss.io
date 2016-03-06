@@ -82,14 +82,14 @@ let About = React.createClass ({
 
                     <div className={classes.header + " col-xs-12 col-sm-10"}>
                         <h1>OUR PROCESS</h1>
-                        <h3 className="amatic">Simple. Straightforward.</h3>
+                        <h3 className="amatic">Simple. Straightfosrward.</h3>
                     </div>
 
                     {steps.map(step => {
                         return (
                             <div key={step.id} className="col-xs-12 col-md-3 row center-xs">
                                 <div className={classes.itemWrapper}>
-                                    <div>
+                                    <div onTouchTap={this.animateSvg.bind(null, step.id)}>
                                         <object className={classes.icon} id={step.id} type="image/svg+xml" data={step.image} onMouseOver={this.animateSvg.bind(null, step.id)}></object>
                                     </div>
                                     <h3 className="amatic">{step.title}</h3>

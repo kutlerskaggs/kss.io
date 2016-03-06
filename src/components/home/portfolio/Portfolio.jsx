@@ -13,6 +13,10 @@ let classes = cssInJS({
         display: "flex",
         textAlign: "left"
     },
+    contentWrapper: {
+        position: "relative",
+        zIndex: 100
+    },
     database: {
         width: "80%",
         height: "auto",
@@ -83,8 +87,8 @@ let Portfolio = React.createClass({
                 let iphoneTop = iphoneWrapperEl.getBoundingClientRect().top,
                     macbookTop = macbookWrapperEl.getBoundingClientRect().top,
                     height = window.innerHeight,
-                    iphoneDiff = 449 + iphoneTop - height,
-                    macbookDiff = 449 + macbookTop - height;
+                    iphoneDiff = 449 + (iphoneTop - height)/1.5,
+                    macbookDiff = 449 + (macbookTop - height)/1.5;
 
                 iphoneDiff = Math.min(Math.max(iphoneDiff, 0), 250);
                 macbookDiff = Math.min(Math.max(macbookDiff, 0), 250);
@@ -127,7 +131,7 @@ let Portfolio = React.createClass({
                     <h1>PORTFOLIO</h1>
                 </div>
 
-                <div className="row start-xs center-sm start-md">
+                <div className={`row start-xs center-sm start-md ${classes.contentWrapper}`}>
 
                     <div className={`col-xs-12 col-sm-8 col-md-4 ${classes.webApp}`}>
                         <h3 className={classes.company}>Westmoreland Coal Co.</h3>
@@ -142,7 +146,7 @@ let Portfolio = React.createClass({
                                 <li>End to End JavaScript</li>
                                 <li>SMS</li>
                                 <li>Email</li>
-                                <li>Amazon Web Services Hosting</li>
+                                <li>Amazon Web Services</li>
                             </ul>
                         </h6>
                     </div>

@@ -21,6 +21,10 @@ let localPalette = {
 
 // static classes
 let classes = cssInJS({
+    alegreya: {
+        fontFamily: "Alegreya Sans SC, sans-serif",
+        fontSize: "2rem"
+    },
     appBar: {
         position: "fixed !important",
         boxShadow: "none !important",
@@ -32,8 +36,7 @@ let classes = cssInJS({
         top: 15,
         left: 15,
         height: 40,
-        lineHeight: "40px",
-        fontSize: "1.7rem"
+        lineHeight: "40px"
     },
     title: {
         color: palette.textColor
@@ -52,7 +55,6 @@ let classes = cssInJS({
     mobileMenuHeader: {
         height: 75,
         padding: 20,
-        fontSize: "1.2rem",
         color: palette.alternateTextColor,
         backgroundColor: palette.accent3Color
     },
@@ -177,14 +179,14 @@ let Header = React.createClass({
             );
         });
         // add header to mobile side nav
-        mobileItems.unshift(<div key="brand" className={classes.mobileMenuHeader}>KutlerSkaggs</div>);
+        mobileItems.unshift(<div key="brand" className={`${classes.mobileMenuHeader} ${classes.alegreya}`}>KutlerSkaggs</div>);
 
         return (
             <div>
                 {this.state.showDesktopNav ?
 
                     <AppBar
-                        title={<span className={classes.title}>KutlerSkaggs</span>}
+                        title={<span className={`${classes.title} ${classes.alegreya}`}>KutlerSkaggs</span>}
                         className={classes.appBar}
                         showMenuIconButton={false}
                         iconElementRight={<div className={classes.headerItems}>{desktopItems}</div>}
@@ -195,7 +197,7 @@ let Header = React.createClass({
                     :
 
                     <div className={classes.mobileNavBar}>
-                        <div className={classes.brand}>{!this.state.mobileNavOpen ? "KutlerSkaggs" : ""}</div>
+                        <div className={`${classes.brand} ${classes.alegreya}`}>{!this.state.mobileNavOpen ? "KutlerSkaggs" : ""}</div>
                         <FloatingActionButton mini={true} className={classes.mobileNavBarButton} backgroundColor="white" onTouchTap={this.handleToggle}>
                           <MenuIcon />
                         </FloatingActionButton>

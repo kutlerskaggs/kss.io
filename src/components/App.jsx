@@ -20,12 +20,17 @@ let classes = cssInJS({
         top: 0,
         left: 0,
         width: "100%",
-        //zIndex: -100,
         transform: "translateZ(0)",
         backgroundPosition: "center center",
         backgroundRepeat: "no-repeat",
         backgroundAttachment: "fixed",
-        backgroundSize: "cover"
+        backgroundSize: "cover",
+
+        "@media (max-width: 991px)": {
+            backgroundAttachment: "inherit",
+            backgroundSize: "inherit",
+            height: "auto"
+        }
     }
 });
 
@@ -43,20 +48,20 @@ export default React.createClass({
         this.setState({
             styles: {
                 background: {
-                    backgroundImage: `url('../../images/beaver_creek${suffix}.jpg')`,
+                    backgroundImage: `url('images/beaver_creek${suffix}.jpg')`,
                     height: `${window.innerHeight + 120}px`
                 }
             }
         });
 
-        // fix issue on IE11 with jittery background image scrolling
-        if(navigator.userAgent.match(/Trident\/7\./)) {
+        // fix issue on IE11/Edge with jittery background image scrolling
+        if(navigator.userAgent.match(/Edge/) || navigator.userAgent.match(/Trident\/7\./)) {
             document.addEventListener("mousewheel", this.scrollIE);
         }
     },
 
     componentWillUnmount() {
-        if(navigator.userAgent.match(/Trident\/7\./)) {
+        if(navigator.userAgent.match(/Edge/) || navigator.userAgent.match(/Trident\/7\./)) {
             document.removeEventListener("mousewheel", this.scrollIE);
         }
     },

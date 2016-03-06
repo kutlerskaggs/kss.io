@@ -152,7 +152,7 @@ let Contact = React.createClass ({
         });
 
         request
-            .post("https://ym6uexi6tc.execute-api.us-west-2.amazonaws.com/prod/kss-io_contact_dynamo")
+            .post("https://d43una9r64.execute-api.us-west-2.amazonaws.com/prod/kutlerskaggs-com_contact")
             .set("Content-Type", "application/json")
             .accept("application/json")
             .send(this.state)
@@ -206,9 +206,9 @@ let Contact = React.createClass ({
 
                     <div className={`col-xs-12 col-md-6 ${classes.formOuterWrapper}`}>
                         <form className={classes.content} style={this.state.styles.formWrapper} onSubmit={this.sendMessage}>
-                            <TextField {...spreadStyles.textField} disabled={this.state.formSubmitted} floatingLabelText="Name" required value={this.state.name} onChange={this.handleChange.bind(null, "name")} />
-                            <TextField {...spreadStyles.textField} disabled={this.state.formSubmitted} floatingLabelText="Email" required value={this.state.email} onChange={this.handleChange.bind(null, "email")} />
-                            <TextField {...spreadStyles.textField} disabled={this.state.formSubmitted} floatingLabelText="Message" multiLine={true} required value={this.state.message} onChange={this.handleChange.bind(null, "message")} />
+                            <TextField {...spreadStyles.textField} disabled={this.state.formSubmitted} floatingLabelText="Name" maxLength="255" required value={this.state.name} onChange={this.handleChange.bind(null, "name")} />
+                            <TextField {...spreadStyles.textField} disabled={this.state.formSubmitted} floatingLabelText="Email" maxLength="255" type="email" required value={this.state.email} onChange={this.handleChange.bind(null, "email")} />
+                            <TextField {...spreadStyles.textField} disabled={this.state.formSubmitted} floatingLabelText="Message" maxLength="500" multiLine={true} required value={this.state.message} onChange={this.handleChange.bind(null, "message")} />
                             <div className={`flex end-xs ${classes.send}`}>
                                 <RaisedButton {...spreadStyles.raisedButton} disabled={this.state.formSubmitted} type="submit" label="Send" />
                             </div>

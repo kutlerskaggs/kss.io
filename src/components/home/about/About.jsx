@@ -12,7 +12,17 @@ let classes = cssInJS({
         width: 300,
         height: 300,
         borderRadius: 5,
-        margin: "1.68rem 0 2.1rem 0"
+        margin: "1.68rem 0 0 0"
+    },
+    info: {
+        textAlign: "left",
+        margin: "1rem 0 2.1rem 1rem"
+    },
+    infoName: {
+        marginBottom: ".2rem"
+    },
+    infoTitle: {
+        margin: 0
     },
     cardBody: {
         padding: 15
@@ -21,6 +31,7 @@ let classes = cssInJS({
         margin: "1.68rem 0 2.1rem 0",
         width: 225,
         height: 285,
+        backgroundColor: "#fff",
         boxShadow: "0 1px 6px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.12)",
         borderRadius: 2,
         overflow: "hidden",
@@ -70,7 +81,7 @@ let members = {
         name: "Ben Schnelle",
         title: "Founder/Developer",
         images: {
-            small: "images/Bcloseup.png"
+            small: "images/Bcloseup.jpg"
         },
         short: "Born in the city, moved to suburbia, moved to the country, became a CPA, moved across the country, became a developer, cofounded a rad company."
     },
@@ -78,16 +89,16 @@ let members = {
         name: "Chris Ludden",
         title: "Founder/Developer",
         images: {
-            small: "images/Ccloseup.png"
+            small: "images/Ccloseup.jpg"
         },
-        short: "Founding member of N.W.A. who more commonly goes by his stage name, Ice Cube. Lately he's been really into making terrible movies."
+        short: "Web developer, node.js ninja, open source enthusiast, beer & whiskey lover, (terrible) snowboarder, resident nerd, lives in Colorado, dreams in code."
     },
     T: {
         class: "start-md",
         name: "Tasha Moreno",
         title: "Designer",
         images: {
-            small: "images/Tcloseup.png"
+            small: "images/Tcloseup.jpg"
         },
         short: "Moonlight designer who spends the majority of her time working with children, singing songs, and being really happy."
     }
@@ -105,9 +116,12 @@ let About = React.createClass ({
         };
     },
 
-    isInternetExplorer() {
+    shouldDisableAtv() {
         let userAgent = window.navigator.userAgent;
-        return userAgent.indexOf("MSIE ") !== -1 || userAgent.indexOf("Trident/") !== -1 || userAgent.indexOf("Edge/") !== -1;
+        return userAgent.indexOf("MSIE ") !== -1 ||
+            userAgent.indexOf("Trident/") !== -1 ||
+            userAgent.indexOf("Edge/") !== -1 ||
+            userAgent.indexOf("Firefox/") !== -1;
     },
 
     reveal(member) {
@@ -147,12 +161,20 @@ let About = React.createClass ({
                                             </div>
                                         </div>
                                         :
-                                        <AtvImg
-                                            layers={[member.images.small]}
-                                            staticFallback={member.images.small}
-                                            isStatic={this.isInternetExplorer()}
-                                            className={classes.image}
-                                        />
+                                        <div>
+                                            <AtvImg
+                                                layers={[member.images.small]}
+                                                staticFallback={member.images.small}
+                                                isStatic={this.shouldDisableAtv()}
+                                                className={classes.image}
+                                            />
+
+                                            <div className={classes.info}>
+                                                <h4 className={classes.infoName}>{member.name}</h4>
+                                                <h4 className={`${classes.infoTitle} ${classes.amatic}`}>{member.title}</h4>
+                                            </div>
+                                        </div>
+
                                     }
                                 </div>
                             );
