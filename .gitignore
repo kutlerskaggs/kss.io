@@ -1,5 +1,8 @@
 # dependencies
 /node_modules
+/src/images
+/tests/images
+/dist
 
 # misc
 npm-debug.log

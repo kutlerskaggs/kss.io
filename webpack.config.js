@@ -1,11 +1,11 @@
 var path = require("path");
-    theme = require("./src/styles/theme"),
-    ExtractTextPlugin = require("extract-text-webpack-plugin");
+var theme = require("./src/styles/theme");
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
     entry: "./src/index.js",
     devServer: {
-        host: "192.168.0.4",
+        host: "localhost", // "192.168.0.4",
         contentBase: "./dist"
     },
     output: {
@@ -13,14 +13,6 @@ module.exports = {
         filename: "app.js"
     },
     module: {
-        preLoaders: [
-            {
-                test: /.jsx?$/,
-                loaders: ["eslint"],
-                exclude: /node_modules/
-            }
-        ],
-
         loaders: [
             {
                 test: /.jsx?$/,

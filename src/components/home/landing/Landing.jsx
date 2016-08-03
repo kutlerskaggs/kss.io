@@ -78,7 +78,9 @@ let Portfolio = React.createClass({
                 -1,
                 120,
                 -7,
-                "SOFTWARE"
+                "SOFTWARE",
+                700,
+                "."
             );
     },
 

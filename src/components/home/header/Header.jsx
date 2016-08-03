@@ -31,7 +31,7 @@ let classes = cssInJS({
         transition: "background-color .5s linear !important"
     },
     brand: {
-        color: palette.textColor,
+        // color: palette.textColor,
         position: "absolute",
         top: 15,
         left: 15,
@@ -53,8 +53,8 @@ let classes = cssInJS({
         backgroundColor: "#151515 !important"
     },
     mobileMenuHeader: {
-        height: 75,
-        padding: 20,
+        maxWidth: "100%",
+        padding: "20px 0",
         color: palette.alternateTextColor,
         backgroundColor: palette.accent3Color
     },
@@ -179,14 +179,15 @@ let Header = React.createClass({
             );
         });
         // add header to mobile side nav
-        mobileItems.unshift(<div key="brand" className={`${classes.mobileMenuHeader} ${classes.alegreya}`}>KutlerSkaggs</div>);
+        mobileItems.unshift(<img key="brand" className={classes.mobileMenuHeader} src="/images/logo-name-white.png" alt="Kutler Skaggs Logo" />);
 
         return (
             <div>
                 {this.state.showDesktopNav ?
 
                     <AppBar
-                        title={<span className={`${classes.title} ${classes.alegreya}`}>KutlerSkaggs</span>}
+                        title={<img src="/images/logo-name.png" alt="Kutler Skaggs Logo" />}
+                        titleStyle={{ display: "flex", alignItems: "center" }}
                         className={classes.appBar}
                         showMenuIconButton={false}
                         iconElementRight={<div className={classes.headerItems}>{desktopItems}</div>}
@@ -197,7 +198,11 @@ let Header = React.createClass({
                     :
 
                     <div className={classes.mobileNavBar}>
-                        <div className={`${classes.brand} ${classes.alegreya}`}>{!this.state.mobileNavOpen ? "KutlerSkaggs" : ""}</div>
+                        {
+                          this.state.mobileNavOpen ? null
+                          : <img className={classes.brand} src="/images/logo-name.png" alt="Kutler Skaggs Logo" />
+                        }
+                        { /* <div className={`${classes.brand} ${classes.alegreya}`}>{!this.state.mobileNavOpen ? "KutlerSkaggs" : ""}</div> */ }
                         <FloatingActionButton mini={true} className={classes.mobileNavBarButton} backgroundColor="white" onTouchTap={this.handleToggle}>
                           <MenuIcon />
                         </FloatingActionButton>
