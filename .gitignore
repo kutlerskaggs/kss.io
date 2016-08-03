@@ -2,7 +2,7 @@
 /node_modules
 /src/images
 /tests/images
-/dist
+/dist/images
 
 # misc
 npm-debug.log
