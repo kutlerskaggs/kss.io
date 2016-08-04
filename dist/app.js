@@ -20102,7 +20102,7 @@
 	            "div",
 	            null,
 	            this.state.showDesktopNav ? _react2.default.createElement(_appBar2.default, {
-	                title: _react2.default.createElement("img", { src: "/images/logo-name.png", alt: "Kutler Skaggs Logo" }),
+	                title: _react2.default.createElement("img", { src: "/images/logo-name.png", alt: "Kutler Skaggs Logo", style: { height: 48 } }),
 	                titleStyle: { display: "flex", alignItems: "center" },
 	                className: classes.appBar,
 	                showMenuIconButton: false,

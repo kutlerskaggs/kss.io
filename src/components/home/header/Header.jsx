@@ -26,6 +26,7 @@ let classes = cssInJS({
         fontSize: "2rem"
     },
     appBar: {
+        // height: "64px",
         position: "fixed !important",
         boxShadow: "none !important",
         transition: "background-color .5s linear !important"
@@ -186,7 +187,7 @@ let Header = React.createClass({
                 {this.state.showDesktopNav ?
 
                     <AppBar
-                        title={<img src="/images/logo-name.png" alt="Kutler Skaggs Logo" />}
+                        title={<img src="/images/logo-name.png" alt="Kutler Skaggs Logo" style={{ height: 48 }} />}
                         titleStyle={{ display: "flex", alignItems: "center" }}
                         className={classes.appBar}
                         showMenuIconButton={false}
@@ -202,7 +203,6 @@ let Header = React.createClass({
                           this.state.mobileNavOpen ? null
                           : <img className={classes.brand} src="/images/logo-name.png" alt="Kutler Skaggs Logo" />
                         }
-                        { /* <div className={`${classes.brand} ${classes.alegreya}`}>{!this.state.mobileNavOpen ? "KutlerSkaggs" : ""}</div> */ }
                         <FloatingActionButton mini={true} className={classes.mobileNavBarButton} backgroundColor="white" onTouchTap={this.handleToggle}>
                           <MenuIcon />
                         </FloatingActionButton>
